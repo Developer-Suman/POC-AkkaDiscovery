@@ -1,0 +1,23 @@
+{{- if .Values.route.enabled }}
+  {{- range .Values.route.routes }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ printf "%s-%s" (include "cpe.fullname" $) .name }}
+  labels:
+    {{- include "cpe.labels" $ | nindent 4 }}
+spec:
+  to:
+    kind: Service
+    name: {{ printf "%s-%s" (include "cpe.fullname" $) .name }}
+  port:
+    targetPort: http
+  host: {{ printf "%s-%s.%s" .host (include "cpe.fullname" $) $.Values.route.hostname }}
+  {{- if $.Values.route.tls.enabled }}
+  tls:
+    termination: {{ $.Values.route.tls.termination }}
+    insecureEdgeTerminationPolicy: {{ $.Values.route.tls.insecureEdgeTerminationPolicy }}
+  {{- end }}
+---
+{{- end }}
+  {{- end }}

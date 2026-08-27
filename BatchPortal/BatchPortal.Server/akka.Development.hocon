@@ -1,0 +1,46 @@
+akka {
+  # Local development: bind to loopback only
+  actor.telemetry.enabled = on
+
+  remote.dot-netty.tcp {
+    hostname = "127.0.0.1"
+    port = 4055
+  }
+
+  # Static seed nodes for local cluster formation
+  cluster.seed-nodes = [
+    "akka.tcp://FraudDetectionActorSystem@127.0.0.1:4053",
+    "akka.tcp://FraudDetectionActorSystem@127.0.0.1:4054",
+    "akka.tcp://FraudDetectionActorSystem@127.0.0.1:4055"
+  ]
+
+  # Override discovery to use static config instead of Kubernetes
+  discovery {
+    method = config
+
+    config {
+      class = "Akka.Discovery.Config.ConfigServiceDiscovery, Akka.Discovery"
+      services {
+        nucleus-rule-services {
+          endpoints = [
+            { host = "127.0.0.1", port = 4053 },
+            { host = "127.0.0.1", port = 4054 },
+            { host = "127.0.0.1", port = 4055 }
+          ]
+        }
+      }
+    }
+  }
+
+  cluster.bootstrap.contact-point-discovery {
+    service-name = "nucleus-rule-services"
+    discovery-method = config
+    required-contact-point-nr = 1
+  }
+}
+
+petabridge.cmd {
+  host = "127.0.0.1"
+  port = 9112
+  log-info = on
+}

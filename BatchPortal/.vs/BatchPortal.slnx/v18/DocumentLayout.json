@@ -1,0 +1,149 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6F80C104-602C-6F63-9A50-8499B87667AE}|batchportal.client\\batchportal.client.esproj|c:\\workspace\\poc-akkadiscovery\\batchportal\\batchportal.client\\batchportal.client.esproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6F80C104-602C-6F63-9A50-8499B87667AE}|batchportal.client\\batchportal.client.esproj|solutionrelative:batchportal.client\\batchportal.client.esproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18911F20-E16F-451B-0A38-CCB84DDBC41B}|BatchPortal.Server\\BatchPortal.Server.csproj|c:\\workspace\\poc-akkadiscovery\\batchportal\\batchportal.server\\batchportal.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{18911F20-E16F-451B-0A38-CCB84DDBC41B}|BatchPortal.Server\\BatchPortal.Server.csproj|solutionrelative:batchportal.server\\batchportal.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18911F20-E16F-451B-0A38-CCB84DDBC41B}|BatchPortal.Server\\BatchPortal.Server.csproj|c:\\workspace\\poc-akkadiscovery\\batchportal\\batchportal.server\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18911F20-E16F-451B-0A38-CCB84DDBC41B}|BatchPortal.Server\\BatchPortal.Server.csproj|solutionrelative:batchportal.server\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages\\microsoft.visualstudio.javascript.sdk\\1.0.5984942\\Sdk\\Sdk.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18911F20-E16F-451B-0A38-CCB84DDBC41B}|BatchPortal.Server\\BatchPortal.Server.csproj|c:\\workspace\\poc-akkadiscovery\\batchportal\\batchportal.server\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{18911F20-E16F-451B-0A38-CCB84DDBC41B}|BatchPortal.Server\\BatchPortal.Server.csproj|solutionrelative:batchportal.server\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BatchPortal.Server\\BatchPortal.Server.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F80C104-602C-6F63-9A50-8499B87667AE}|batchportal.client\\batchportal.client.esproj|c:\\workspace\\poc-akkadiscovery\\batchportal\\batchportal.client\\angular.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6F80C104-602C-6F63-9A50-8499B87667AE}|batchportal.client\\batchportal.client.esproj|solutionrelative:batchportal.client\\angular.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\workspace\\POC-AKKaDiscovery\\NucleusRuleServices.slnx||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NucleusRuleServices.slnx",
+              "DocumentMoniker": "C:\\workspace\\POC-AKKaDiscovery\\NucleusRuleServices.slnx",
+              "RelativeDocumentMoniker": "..\\NucleusRuleServices.slnx",
+              "ToolTip": "C:\\workspace\\POC-AKKaDiscovery\\NucleusRuleServices.slnx",
+              "RelativeToolTip": "..\\NucleusRuleServices.slnx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002855|",
+              "WhenOpened": "2026-08-25T07:28:11.852Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "angular.json",
+              "DocumentMoniker": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\batchportal.client\\angular.json",
+              "RelativeDocumentMoniker": "batchportal.client\\angular.json",
+              "ToolTip": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\batchportal.client\\angular.json",
+              "RelativeToolTip": "batchportal.client\\angular.json",
+              "ViewState": "AgIAAE0AAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-25T06:30:15.546Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BatchPortal.Server.csproj.user",
+              "DocumentMoniker": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj.user",
+              "RelativeDocumentMoniker": "BatchPortal.Server\\BatchPortal.Server.csproj.user",
+              "ToolTip": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj.user",
+              "RelativeToolTip": "BatchPortal.Server\\BatchPortal.Server.csproj.user",
+              "ViewState": "AgIAAAMAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2026-08-25T06:26:56.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "batchportal.client.esproj",
+              "DocumentMoniker": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\batchportal.client\\batchportal.client.esproj",
+              "RelativeDocumentMoniker": "batchportal.client\\batchportal.client.esproj",
+              "ToolTip": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\batchportal.client\\batchportal.client.esproj",
+              "RelativeToolTip": "batchportal.client\\batchportal.client.esproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-08-25T06:15:58.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "BatchPortal.Server\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\Properties\\launchSettings.json",
+              "RelativeToolTip": "BatchPortal.Server\\Properties\\launchSettings.json",
+              "ViewState": "AgIAABEAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-25T06:13:17.954Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BatchPortal.Server.csproj",
+              "DocumentMoniker": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj",
+              "RelativeDocumentMoniker": "BatchPortal.Server\\BatchPortal.Server.csproj",
+              "ToolTip": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj",
+              "RelativeToolTip": "BatchPortal.Server\\BatchPortal.Server.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-08-25T06:13:14.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "BatchPortal.Server\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "BatchPortal.Server\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-25T06:09:22.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Sdk.targets",
+              "DocumentMoniker": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages\\microsoft.visualstudio.javascript.sdk\\1.0.5984942\\Sdk\\Sdk.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages\\microsoft.visualstudio.javascript.sdk\\1.0.5984942\\Sdk\\Sdk.targets",
+              "ToolTip": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages\\microsoft.visualstudio.javascript.sdk\\1.0.5984942\\Sdk\\Sdk.targets",
+              "RelativeToolTip": "..\\..\\..\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages\\microsoft.visualstudio.javascript.sdk\\1.0.5984942\\Sdk\\Sdk.targets",
+              "ViewState": "AgIAAA0BAAAAAAAAAAAtwBMBAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2026-08-24T17:39:26.926Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "cpe.fullname" . }}-akka-variables
+  labels:
+    {{- include "cpe.labels" . | nindent 4 }}
+data:
+  # Lighthouse env vars (consumed via HOCON)
+  LOG_LEVEL: {{ .Values.lighthouse.logLevel }}
+  CLUSTER_PORT: "{{ .Values.services.lighthouse.ports.akka }}"
+  PETABRIDGE_PORT: "{{ .Values.services.lighthouse.ports.pbm }}"
+  SEED_NODES: {{ include "cpe.lighthouseSeedNodes" . }}
+  # AkkaOptions env vars (consumed by .NET services via IConfiguration)
+  AkkaOptions__ClusterName: {{ .Values.akkaOptions.clusterName | quote }}
+  AkkaOptions__RemoteOptions__HostName: {{ .Values.akkaOptions.remoteOptions.hostName | quote }}
+  AkkaOptions__RemoteOptions__Port: "{{ .Values.akkaOptions.remoteOptions.port }}"
+  AkkaOptions__RemoteOptions__PublicPort: "{{ .Values.akkaOptions.remoteOptions.publicPort }}"
+  AkkaOptions__RemoteOptions__SendBufferSize: "{{ .Values.akkaOptions.remoteOptions.sendBufferSize }}"
+  AkkaOptions__RemoteOptions__ReceiveBufferSize: "{{ .Values.akkaOptions.remoteOptions.receiveBufferSize }}"
+  AkkaOptions__RemoteOptions__MaxFrameSize: "{{ .Values.akkaOptions.remoteOptions.maxFrameSize }}"
+  AkkaOptions__ClusterOptions__LogInfo: "{{ .Values.akkaOptions.clusterOptions.logInfo }}"
+  AkkaOptions__ClusterOptions__ClusterReadyCheck: "{{ .Values.akkaOptions.clusterOptions.clusterReadyCheck }}"
+  {{- include "cpe.akkaOptionsSeedNodes" . | nindent 2 }}
+

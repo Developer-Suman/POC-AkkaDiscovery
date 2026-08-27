@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-BatchProcessor-c749875b-e3aa-4f4f-ae74-db2c4e6bf3b8</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Akka.Discovery.KubernetesApi" Version="1.5.70" />
+    <PackageReference Include="Akka.Hosting" Version="1.5.70" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
+    <PackageReference Include="Petabridge.Cmd.Cluster" Version="1.5.0" />
+    <PackageReference Include="Petabridge.Cmd.Host" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="akka.hocon">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="akka.Development.hocon">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

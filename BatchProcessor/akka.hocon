@@ -1,0 +1,30 @@
+akka {
+  actor.provider = cluster
+
+  # Production: bind to all interfaces so Kubernetes can route traffic
+  remote.dot-netty.tcp {
+    hostname = "0.0.0.0"
+    port = 4053
+  }
+
+  discovery {
+    method = kubernetes-api
+
+    kubernetes-api {
+      class = "Akka.Discovery.KubernetesApi.KubernetesApiServiceDiscovery, Akka.Discovery.KubernetesApi"
+      pod-namespace = "default"
+    }
+  }
+
+  cluster.bootstrap.contact-point-discovery {
+    service-name = "nucleus-rule-services"
+    discovery-method = kubernetes-api
+    required-contact-point-nr = 3
+  }
+}
+
+petabridge.cmd {
+  host = "0.0.0.0"
+  port = 9110
+  log-info = on
+}

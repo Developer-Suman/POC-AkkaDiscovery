@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="BatchPortal/batchportal.client/batchportal.client.esproj">
+	<Build />
+	<Deploy />
+  </Project>
+  <Project Path="BatchPortal/BatchPortal.Server/BatchPortal.Server.csproj" />
+  <Project Path="BatchProcessor/BatchProcessor.csproj" />
+  <Project Path="EditorService/EditorService.csproj" />
+</Solution>

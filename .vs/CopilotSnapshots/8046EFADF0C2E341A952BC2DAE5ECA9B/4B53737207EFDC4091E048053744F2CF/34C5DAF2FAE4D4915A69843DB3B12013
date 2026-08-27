@@ -1,0 +1,39 @@
+﻿akka {
+  actor.provider = cluster
+
+  remote.dot-netty.tcp {
+	hostname = "0.0.0.0"
+	port = 4053
+  }
+
+  discovery {
+	method = aggregate
+
+	aggregate {
+	  discovery-methods = ["kubernetes-api", "config"]
+	}
+
+	kubernetes-api {
+	  class = "Akka.Discovery.KubernetesApi.KubernetesApiServiceDiscovery, Akka.Discovery.KubernetesApi"
+	  pod-namespace = "default"
+	}
+
+	config {
+	  class = "Akka.Discovery.Config.ConfigServiceDiscovery, Akka.Discovery"
+	  services {
+		nucleus-rule-services {
+		  endpoints = [
+			{ host = "batchprocessor", port = 4053 },
+			{ host = "editorservice", port = 4054 }
+		  ]
+		}
+	  }
+	}
+  }
+
+  cluster.bootstrap.contact-point-discovery {
+	service-name = "nucleus-rule-services"
+	discovery-method = aggregate
+	required-contact-point-nr = 1
+  }
+}

@@ -1,0 +1,20 @@
+﻿using BatchProcessor;
+using Akka.Hosting;
+
+var builder = Host.CreateApplicationBuilder(args);
+
+builder.Services.AddAkka("FraudDetectionActorSystem", (akkaBuilder, provider) =>
+{
+    var hoconPath = Path.Combine(builder.Environment.ContentRootPath, "akka.hocon");
+
+    if (File.Exists(hoconPath))
+    {
+        var hocon = File.ReadAllText(hoconPath);
+        akkaBuilder.AddHocon(hocon, HoconAddMode.Prepend);
+    }
+});
+
+builder.Services.AddHostedService<Worker>();
+
+var host = builder.Build();
+host.Run();

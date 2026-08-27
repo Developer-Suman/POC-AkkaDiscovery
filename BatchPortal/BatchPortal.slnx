@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Application/">
+    <Project Path="../BatchProcessor/BatchProcessor.csproj" Id="fa180a99-6f6f-4204-bcaf-0f58a6295d64" />
+    <Project Path="../EditorService/EditorService.csproj" Id="bcaf0561-de3e-40b9-bc54-a9bf93634115" />
+    <Project Path="batchportal.client/batchportal.client.esproj">
+      <Build />
+      <Deploy />
+    </Project>
+    <Project Path="BatchPortal.Server/BatchPortal.Server.csproj" />
+  </Folder>
+</Solution>

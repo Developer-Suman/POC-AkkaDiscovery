@@ -1,0 +1,67 @@
+{{- range .Values.deployments }}
+  {{- if .enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-%s" (include "cpe.fullname" $) .name }}
+spec:
+  replicas: {{ .replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ printf "%s-%s" (include "cpe.fullname" $) .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ printf "%s-%s" (include "cpe.fullname" $) .name }}
+        {{- include "cpe.labels" $ | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ printf "%s-%s" (include "cpe.fullname" $) .name }}
+          image: {{ printf "%s/%s:%s" $.Values.image.repository .name $.Values.image.tag }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            {{- range $portName, $port := .ports }}
+            - containerPort: {{ $port }}
+              name: {{ $portName }}
+            {{- end }}
+          envFrom:
+            - secretRef:
+                name: {{ include "cpe.fullname" $ }}-secrets
+            - configMapRef:
+            name: {{ include "cpe.fullname" $ }}-env-variables
+            - configMapRef:
+            name: {{ include "cpe.fullname" $ }}-akka-variables
+          env:
+            {{- if .env }}
+            {{- toYaml .env | nindent 12 }}
+            {{- end }}
+
+            - name: AkkaOptions__RemoteOptions__PublicHostName
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            {{- if .akkaRole }}
+            - name: AkkaOptions__ClusterOptions__Roles__0
+              value: {{ .akkaRole | quote }}
+            {{- end }}
+            {{- if .ports.pbm }}
+            - name: AkkaOptions__PetabridgeOptions__Port
+              value: "{{ .ports.pbm }}"
+            - name: AkkaOptions__PetabridgeOptions__Host
+              value: "0.0.0.0"
+            {{- end }}
+            - name: Logging__LogLevel__Akka
+              value: "Debug"
+
+          volumeMounts:
+            {{- toYaml $.Values.volumeMounts | nindent 12 }}
+          resources:
+            {{- toYaml .resources | nindent 12 }}
+      volumes:
+        - name: cpe-volume-tns
+          secret:
+            secretName: {{ include "cpe.fullname" $ }}-tns
+            optional: false
+---
+{{- end }}
+  {{- end }}

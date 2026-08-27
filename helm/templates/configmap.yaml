@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "cpe.fullname" . }}-env-variables
+  labels:
+    {{- include "cpe.labels" . | nindent 4 }}
+data:
+  {{- toYaml .Values.appsettings | nindent 2 }}

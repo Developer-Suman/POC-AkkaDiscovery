@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "+jSTRQ8vY4g=",
+  "success": false,
+  "projectFilePath": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\batchportal.client\\batchportal.client.esproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1012",
+      "level": "Error",
+      "message": "Platform version is not present for one or more target frameworks, even though they have specified a platform: net6.0-none",
+      "projectPath": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\batchportal.client\\batchportal.client.esproj",
+      "filePath": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\batchportal.client\\batchportal.client.esproj",
+      "targetGraphs": []
+    }
+  ]
+}

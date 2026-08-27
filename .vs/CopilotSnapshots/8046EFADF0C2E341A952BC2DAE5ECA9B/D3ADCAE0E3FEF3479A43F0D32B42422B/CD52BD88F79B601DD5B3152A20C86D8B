@@ -1,0 +1,11 @@
+﻿{
+  "Akka": {
+    "Hocon": "akka {\n  actor.provider = cluster\n\n  remote.dot-netty.tcp {\n    hostname = \"0.0.0.0\"\n    port = 4054\n  }\n\n  discovery {\n    method = aggregate\n\n    aggregate {\n      discovery-methods = [\"kubernetes-api\", \"config\"]\n    }\n\n    kubernetes-api {\n      class = \"Akka.Discovery.KubernetesApi.KubernetesApiServiceDiscovery, Akka.Discovery.KubernetesApi\"\n      pod-namespace = \"default\"\n    }\n\n    config {\n      class = \"Akka.Discovery.Config.ConfigServiceDiscovery, Akka.Discovery\"\n      services {\n        nucleus-rule-services {\n          endpoints = [\n            { host = \"batchprocessor\", port = 4053 },\n            { host = \"editorservice\", port = 4054 }\n          ]\n        }\n      }\n    }\n  }\n\n  cluster.bootstrap.contact-point-discovery {\n    service-name = \"nucleus-rule-services\"\n    discovery-method = aggregate\n    required-contact-point-nr = 1\n  }\n}\n"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  }
+}

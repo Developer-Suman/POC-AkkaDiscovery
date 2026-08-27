@@ -1,0 +1,24 @@
+﻿using Akka.Actor;
+using Petabridge.Cmd.Cluster;
+using Petabridge.Cmd.Host;
+
+namespace BatchProcessor;
+
+public sealed class PetabridgeCommandHostService(ActorSystem actorSystem, ILogger<PetabridgeCommandHostService> logger) : IHostedService
+{
+    private PetabridgeCmd? _petabridgeCmd;
+
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        _petabridgeCmd = PetabridgeCmd.Get(actorSystem);
+        _petabridgeCmd.RegisterCommandPalette(ClusterCommands.Instance);
+        _petabridgeCmd.Start();
+
+        logger.LogInformation("Petabridge.Cmd started for actor system {ActorSystemName}", actorSystem.Name);`r`n        return Task.CompletedTask;`r`n    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        if (_petabridgeCmd is IDisposable disposable)`r`n        {`r`n            disposable.Dispose();`r`n        }
+        logger.LogInformation("Petabridge.Cmd stopped for actor system {ActorSystemName}", actorSystem.Name);`r`n        return Task.CompletedTask;`r`n    }
+}
+
