@@ -1,1 +1,0 @@
-C:\workspace\POC-AKKaDiscovery\BatchPortal\batchportal.client\obj\Debug\batchportal.client.esproj.CoreCompileInputs.cache
