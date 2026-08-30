@@ -21,6 +21,17 @@ akka {
     discovery-method = kubernetes-api
     required-contact-point-nr = 3
   }
+
+  # Split Brain Resolver: automatically down unreachable nodes in a network partition.
+  # keep-majority keeps the partition with more nodes; the minority partition downs itself.
+  cluster {
+    downing-provider-class = "Akka.Cluster.SBR.SplitBrainResolverProvider, Akka.Cluster"
+    split-brain-resolver {
+      active-strategy = keep-majority
+      stable-after = 20s
+      down-all-when-unstable = on
+    }
+  }
 }
 
 petabridge.cmd {

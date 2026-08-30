@@ -89,3 +89,4 @@ C:\workspace\POC-AKKaDiscovery\EditorService\bin\Debug\net10.0\Petabridge.Cmd.Co
 C:\workspace\POC-AKKaDiscovery\EditorService\bin\Debug\net10.0\Petabridge.Cmd.Host.dll
 C:\workspace\POC-AKKaDiscovery\EditorService\bin\Debug\net10.0\Phobos.Actor.Common.dll
 C:\workspace\POC-AKKaDiscovery\EditorService\bin\Debug\net10.0\akka.Development.hocon
+C:\workspace\POC-AKKaDiscovery\EditorService\obj\Debug\net10.0\EditorService.sourcelink.json
