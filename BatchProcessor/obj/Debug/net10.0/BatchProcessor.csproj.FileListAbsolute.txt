@@ -89,3 +89,4 @@ C:\workspace\POC-AKKaDiscovery\BatchProcessor\bin\Debug\net10.0\Petabridge.Cmd.C
 C:\workspace\POC-AKKaDiscovery\BatchProcessor\bin\Debug\net10.0\Petabridge.Cmd.Host.dll
 C:\workspace\POC-AKKaDiscovery\BatchProcessor\bin\Debug\net10.0\Phobos.Actor.Common.dll
 C:\workspace\POC-AKKaDiscovery\BatchProcessor\bin\Debug\net10.0\akka.Development.hocon
+C:\workspace\POC-AKKaDiscovery\BatchProcessor\obj\Debug\net10.0\BatchProcessor.sourcelink.json
