@@ -19,7 +19,7 @@ FROM artifactory.cotiviti.com/docker/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["BatchPortal.Server/BatchPortal.Server.csproj", "BatchPortal.Server/"]
-RUN dotnet restore "BatchPortal.Server/BatchPortal.Server.csproj"
+RUN dotnet restore "BatchPortal.Server/BatchPortal.Server.csproj" /p:BuildClientProject=false
 COPY . .
 WORKDIR "/src/BatchPortal.Server"
 RUN dotnet build "BatchPortal.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build

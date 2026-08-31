@@ -75,3 +75,7 @@ C:\workspace\POC-AKKaDiscovery\BatchPortal\BatchPortal.Server\bin\Debug\net10.0\
 C:\workspace\POC-AKKaDiscovery\BatchPortal\BatchPortal.Server\bin\Debug\net10.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\workspace\POC-AKKaDiscovery\BatchPortal\BatchPortal.Server\bin\Debug\net10.0\akka.Development.hocon
 C:\workspace\POC-AKKaDiscovery\BatchPortal\BatchPortal.Server\obj\Debug\net10.0\BatchPortal.Server.sourcelink.json
+C:\workspace\POC-AKKaDiscovery\BatchPortal\BatchPortal.Server\bin\Debug\net10.0\Akka.Http.Shim.dll
+C:\workspace\POC-AKKaDiscovery\BatchPortal\BatchPortal.Server\bin\Debug\net10.0\Akka.Management.dll
+C:\workspace\POC-AKKaDiscovery\BatchPortal\BatchPortal.Server\bin\Debug\net10.0\Ceen.Common.dll
+C:\workspace\POC-AKKaDiscovery\BatchPortal\BatchPortal.Server\bin\Debug\net10.0\Ceen.Httpd.dll

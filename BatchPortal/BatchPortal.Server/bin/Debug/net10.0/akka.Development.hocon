@@ -1,5 +1,6 @@
 akka {
   # Local development: bind to loopback only
+  actor.provider = cluster
   actor.telemetry.enabled = on
 
   remote.dot-netty.tcp {
@@ -7,35 +8,36 @@ akka {
     port = 4055
   }
 
-  # Static seed nodes for local cluster formation
-  cluster.seed-nodes = [
-    "akka.tcp://FraudDetectionActorSystem@127.0.0.1:4053",
-    "akka.tcp://FraudDetectionActorSystem@127.0.0.1:4054",
-    "akka.tcp://FraudDetectionActorSystem@127.0.0.1:4055"
-  ]
-
-  # Override discovery to use static config instead of Kubernetes
+  # Local bootstrap via Akka.Discovery config provider
   discovery {
     method = config
 
     config {
       class = "Akka.Discovery.Config.ConfigServiceDiscovery, Akka.Discovery"
       services {
-        nucleus-rule-services {
+        fraud-detection-bootstrap {
           endpoints = [
-            { host = "127.0.0.1", port = 4053 },
-            { host = "127.0.0.1", port = 4054 },
-            { host = "127.0.0.1", port = 4055 }
+            { host = "127.0.0.1", port = 8558 },
+            { host = "127.0.0.1", port = 8559 },
+            { host = "127.0.0.1", port = 8560 }
           ]
         }
       }
     }
   }
 
-  cluster.bootstrap.contact-point-discovery {
-    service-name = "nucleus-rule-services"
-    discovery-method = config
-    required-contact-point-nr = 1
+  management {
+    http {
+      hostname = "127.0.0.1"
+      port = 8558
+    }
+
+    cluster.bootstrap.contact-point-discovery {
+      service-name = "fraud-detection-bootstrap"
+      discovery-method = config
+      required-contact-point-nr = 1
+      contact-point-fallback-port = 8558
+    }
   }
 }
 

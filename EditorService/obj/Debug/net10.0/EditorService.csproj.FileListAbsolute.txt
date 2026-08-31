@@ -90,3 +90,7 @@ C:\workspace\POC-AKKaDiscovery\EditorService\bin\Debug\net10.0\Petabridge.Cmd.Ho
 C:\workspace\POC-AKKaDiscovery\EditorService\bin\Debug\net10.0\Phobos.Actor.Common.dll
 C:\workspace\POC-AKKaDiscovery\EditorService\bin\Debug\net10.0\akka.Development.hocon
 C:\workspace\POC-AKKaDiscovery\EditorService\obj\Debug\net10.0\EditorService.sourcelink.json
+C:\workspace\POC-AKKaDiscovery\EditorService\bin\Debug\net10.0\Akka.Http.Shim.dll
+C:\workspace\POC-AKKaDiscovery\EditorService\bin\Debug\net10.0\Akka.Management.dll
+C:\workspace\POC-AKKaDiscovery\EditorService\bin\Debug\net10.0\Ceen.Common.dll
+C:\workspace\POC-AKKaDiscovery\EditorService\bin\Debug\net10.0\Ceen.Httpd.dll

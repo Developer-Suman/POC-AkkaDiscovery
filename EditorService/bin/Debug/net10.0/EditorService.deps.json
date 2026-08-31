@@ -10,6 +10,7 @@
         "dependencies": {
           "Akka.Discovery.KubernetesApi": "1.5.70",
           "Akka.Hosting": "1.5.70",
+          "Akka.Management": "1.5.70",
           "Microsoft.Extensions.Hosting": "10.0.11",
           "Petabridge.Cmd.Cluster": "1.5.0",
           "Petabridge.Cmd.Host": "1.5.0"
@@ -31,26 +32,26 @@
           }
         }
       },
-      "Akka.Cluster/1.5.53": {
+      "Akka.Cluster/1.5.70": {
         "dependencies": {
-          "Akka.Coordination": "1.5.53",
-          "Akka.Remote": "1.5.53"
+          "Akka.Coordination": "1.5.70",
+          "Akka.Remote": "1.5.70"
         },
         "runtime": {
           "lib/net6.0/Akka.Cluster.dll": {
-            "assemblyVersion": "1.5.53.0",
-            "fileVersion": "1.5.53.0"
+            "assemblyVersion": "1.5.70.0",
+            "fileVersion": "1.5.70.0"
           }
         }
       },
-      "Akka.Coordination/1.5.53": {
+      "Akka.Coordination/1.5.70": {
         "dependencies": {
           "Akka": "1.5.70"
         },
         "runtime": {
           "lib/net6.0/Akka.Coordination.dll": {
-            "assemblyVersion": "1.5.53.0",
-            "fileVersion": "1.5.53.0"
+            "assemblyVersion": "1.5.70.0",
+            "fileVersion": "1.5.70.0"
           }
         }
       },
@@ -107,7 +108,34 @@
           }
         }
       },
-      "Akka.Remote/1.5.53": {
+      "Akka.Http.Shim/1.5.70": {
+        "dependencies": {
+          "Akka": "1.5.70",
+          "Ceen.Httpd": "0.9.9"
+        },
+        "runtime": {
+          "lib/net6.0/Akka.Http.Shim.dll": {
+            "assemblyVersion": "1.5.70.0",
+            "fileVersion": "1.5.70.0"
+          }
+        }
+      },
+      "Akka.Management/1.5.70": {
+        "dependencies": {
+          "Akka": "1.5.70",
+          "Akka.Cluster": "1.5.70",
+          "Akka.Discovery": "1.5.70",
+          "Akka.Hosting": "1.5.70",
+          "Akka.Http.Shim": "1.5.70"
+        },
+        "runtime": {
+          "lib/net6.0/Akka.Management.dll": {
+            "assemblyVersion": "1.5.70.0",
+            "fileVersion": "1.5.70.0"
+          }
+        }
+      },
+      "Akka.Remote/1.5.70": {
         "dependencies": {
           "Akka": "1.5.70",
           "DotNetty.Handlers": "0.7.6",
@@ -115,8 +143,8 @@
         },
         "runtime": {
           "lib/net6.0/Akka.Remote.dll": {
-            "assemblyVersion": "1.5.53.0",
-            "fileVersion": "1.5.53.0"
+            "assemblyVersion": "1.5.70.0",
+            "fileVersion": "1.5.70.0"
           }
         }
       },
@@ -130,6 +158,18 @@
           "lib/net6.0/Akka.Streams.dll": {
             "assemblyVersion": "1.5.70.0",
             "fileVersion": "1.5.70.0"
+          }
+        }
+      },
+      "Ceen.Httpd/0.9.9": {
+        "runtime": {
+          "lib/netstandard2.0/Ceen.Common.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "lib/netstandard2.0/Ceen.Httpd.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -671,7 +711,7 @@
       },
       "Petabridge.Cmd.Cluster/1.5.0": {
         "dependencies": {
-          "Akka.Cluster": "1.5.53",
+          "Akka.Cluster": "1.5.70",
           "Petabridge.Cmd.Host": "1.5.0"
         },
         "runtime": {
@@ -850,19 +890,19 @@
       "path": "akka/1.5.70",
       "hashPath": "akka.1.5.70.nupkg.sha512"
     },
-    "Akka.Cluster/1.5.53": {
+    "Akka.Cluster/1.5.70": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-B/Agg3+MLM/6BlZVGXh5y20w3CmXLN+w3eMu6spjfTeQJMUp8O+A4S3KpfhU1r6IC/OJOwBYYnu27RRezY/Whw==",
-      "path": "akka.cluster/1.5.53",
-      "hashPath": "akka.cluster.1.5.53.nupkg.sha512"
+      "sha512": "sha512-EnVZLs/c0iG4SjT6/nVOnMojHrJPTina+HNtyFiu6T+WW5n6cLnbG+vr8lDHIFQw0yB2/BpIxbH+ivbQPctb7w==",
+      "path": "akka.cluster/1.5.70",
+      "hashPath": "akka.cluster.1.5.70.nupkg.sha512"
     },
-    "Akka.Coordination/1.5.53": {
+    "Akka.Coordination/1.5.70": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-JJbBRdHZ8njdRKHstIm7Xtvld6quENRmw3FlY/dHtjS3/Ovn3hDzYUHL9j5/hvltcF0Smi5oBPnrNwaR9wZ6Kg==",
-      "path": "akka.coordination/1.5.53",
-      "hashPath": "akka.coordination.1.5.53.nupkg.sha512"
+      "sha512": "sha512-+XzqHyWmrxW+ThOjdjwAs6SPi2caRhApQhUAcr5kSRlY+K80W2ZVPrWlVF461HjxrzjBh6nuZrxXOSKOrbMYzw==",
+      "path": "akka.coordination/1.5.70",
+      "hashPath": "akka.coordination.1.5.70.nupkg.sha512"
     },
     "Akka.DependencyInjection/1.5.70": {
       "type": "package",
@@ -892,12 +932,26 @@
       "path": "akka.hosting/1.5.70",
       "hashPath": "akka.hosting.1.5.70.nupkg.sha512"
     },
-    "Akka.Remote/1.5.53": {
+    "Akka.Http.Shim/1.5.70": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-JV/4OxoG9I2JZe3qu5x+FGdt4ZxNo/w5AGsyKvm0K4hjX3zIRSdz6obmuCarwjRetj/HCgAiolEiL22d/0EkSw==",
-      "path": "akka.remote/1.5.53",
-      "hashPath": "akka.remote.1.5.53.nupkg.sha512"
+      "sha512": "sha512-KDX49ziKaJVPXQ06MeqBSvVVMUSiBtXAh0T6IIVHqn6jPE75C/phaygIxilq1wW5Ofe3Np3g5MNWs38x96qrcQ==",
+      "path": "akka.http.shim/1.5.70",
+      "hashPath": "akka.http.shim.1.5.70.nupkg.sha512"
+    },
+    "Akka.Management/1.5.70": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vsKJxU86NwueWRJC/izpBhBUUQSsLuuKt5IuUjeAaZqZPYokT/Dn2sNufRbq7Nz8IBQr4nG+lMK1vi/qyISxhA==",
+      "path": "akka.management/1.5.70",
+      "hashPath": "akka.management.1.5.70.nupkg.sha512"
+    },
+    "Akka.Remote/1.5.70": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SNP97A8+MFQ3eKdCcOjA+KKX/LCMIKV4+RHX4I7MtcjUTzcHcXss4yV3B0+t7EpqhkrgEpJlKjvxwmehFecuiA==",
+      "path": "akka.remote/1.5.70",
+      "hashPath": "akka.remote.1.5.70.nupkg.sha512"
     },
     "Akka.Streams/1.5.70": {
       "type": "package",
@@ -905,6 +959,13 @@
       "sha512": "sha512-+upNFoPyej7aiAGIn9SwwCZaAZGHoDYVTRpmvcMhg9cytwSeO6WwTLj7U8gUnLy0pwLKNfVX/ae7ZXNIVlax7Q==",
       "path": "akka.streams/1.5.70",
       "hashPath": "akka.streams.1.5.70.nupkg.sha512"
+    },
+    "Ceen.Httpd/0.9.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nzjWihqdQBJUrGlDWx4711aG5A2P0Pmz/5n5RCsTZUdOUfZZdk3lPHVI+1rtwSzt9F4REZ05nF765nFp8YzYGg==",
+      "path": "ceen.httpd/0.9.9",
+      "hashPath": "ceen.httpd.0.9.9.nupkg.sha512"
     },
     "DotNetty.Buffers/0.7.6": {
       "type": "package",

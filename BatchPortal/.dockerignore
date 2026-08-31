@@ -1,0 +1,8 @@
+**/node_modules
+**/.angular/cache
+**/obj
+**/bin
+*.user
+.git
+.vs
+.idea

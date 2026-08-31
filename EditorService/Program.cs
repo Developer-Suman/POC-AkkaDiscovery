@@ -1,5 +1,8 @@
 using EditorService;
+using Akka.Discovery.KubernetesApi;
 using Akka.Hosting;
+using Akka.Management;
+using Akka.Management.Cluster.Bootstrap;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -18,6 +21,11 @@ builder.Services.AddAkka("FraudDetectionActorSystem", (akkaBuilder, provider) =>
     {
         akkaBuilder.AddHocon(File.ReadAllText(envHoconPath), HoconAddMode.Prepend);
     }
+
+    akkaBuilder
+        .WithKubernetesDiscovery()
+        .WithAkkaManagement()
+        .WithClusterBootstrap();
 });
 
 builder.Services.AddHostedService<PetabridgeCommandHostService>();

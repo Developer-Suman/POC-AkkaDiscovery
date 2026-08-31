@@ -23,11 +23,11 @@
       "Akka.Analyzers/0.3.3": {
         "type": "package"
       },
-      "Akka.Cluster/1.5.53": {
+      "Akka.Cluster/1.5.70": {
         "type": "package",
         "dependencies": {
-          "Akka.Coordination": "1.5.53",
-          "Akka.Remote": "1.5.53"
+          "Akka.Coordination": "1.5.70",
+          "Akka.Remote": "1.5.70"
         },
         "compile": {
           "lib/net6.0/Akka.Cluster.dll": {
@@ -40,10 +40,10 @@
           }
         }
       },
-      "Akka.Coordination/1.5.53": {
+      "Akka.Coordination/1.5.70": {
         "type": "package",
         "dependencies": {
-          "Akka": "1.5.53"
+          "Akka": "1.5.70"
         },
         "compile": {
           "lib/net6.0/Akka.Coordination.dll": {
@@ -120,10 +120,47 @@
           "lib/net6.0/Akka.Hosting.dll": {}
         }
       },
-      "Akka.Remote/1.5.53": {
+      "Akka.Http.Shim/1.5.70": {
         "type": "package",
         "dependencies": {
-          "Akka": "1.5.53",
+          "Akka": "1.5.70",
+          "Ceen.Httpd": "0.9.9"
+        },
+        "compile": {
+          "lib/net6.0/Akka.Http.Shim.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Akka.Http.Shim.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Akka.Management/1.5.70": {
+        "type": "package",
+        "dependencies": {
+          "Akka": "1.5.70",
+          "Akka.Cluster": "1.5.70",
+          "Akka.Discovery": "1.5.70",
+          "Akka.Hosting": "1.5.68",
+          "Akka.Http.Shim": "1.5.70"
+        },
+        "compile": {
+          "lib/net6.0/Akka.Management.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Akka.Management.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Akka.Remote/1.5.70": {
+        "type": "package",
+        "dependencies": {
+          "Akka": "1.5.70",
           "DotNetty.Handlers": "0.7.6",
           "Google.Protobuf": "3.26.1"
         },
@@ -154,6 +191,17 @@
           "lib/net6.0/Akka.Streams.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "Ceen.Httpd/0.9.9": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Ceen.Common.dll": {},
+          "lib/netstandard2.0/Ceen.Httpd.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ceen.Common.dll": {},
+          "lib/netstandard2.0/Ceen.Httpd.dll": {}
         }
       },
       "DotNetty.Buffers/0.7.6": {
@@ -655,15 +703,15 @@
         "tools/uninstall.ps1"
       ]
     },
-    "Akka.Cluster/1.5.53": {
-      "sha512": "B/Agg3+MLM/6BlZVGXh5y20w3CmXLN+w3eMu6spjfTeQJMUp8O+A4S3KpfhU1r6IC/OJOwBYYnu27RRezY/Whw==",
+    "Akka.Cluster/1.5.70": {
+      "sha512": "EnVZLs/c0iG4SjT6/nVOnMojHrJPTina+HNtyFiu6T+WW5n6cLnbG+vr8lDHIFQw0yB2/BpIxbH+ivbQPctb7w==",
       "type": "package",
-      "path": "akka.cluster/1.5.53",
+      "path": "akka.cluster/1.5.70",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "akka.cluster.1.5.53.nupkg.sha512",
+        "akka.cluster.1.5.70.nupkg.sha512",
         "akka.cluster.nuspec",
         "akkalogo.png",
         "lib/net6.0/Akka.Cluster.dll",
@@ -672,15 +720,15 @@
         "lib/netstandard2.0/Akka.Cluster.xml"
       ]
     },
-    "Akka.Coordination/1.5.53": {
-      "sha512": "JJbBRdHZ8njdRKHstIm7Xtvld6quENRmw3FlY/dHtjS3/Ovn3hDzYUHL9j5/hvltcF0Smi5oBPnrNwaR9wZ6Kg==",
+    "Akka.Coordination/1.5.70": {
+      "sha512": "+XzqHyWmrxW+ThOjdjwAs6SPi2caRhApQhUAcr5kSRlY+K80W2ZVPrWlVF461HjxrzjBh6nuZrxXOSKOrbMYzw==",
       "type": "package",
-      "path": "akka.coordination/1.5.53",
+      "path": "akka.coordination/1.5.70",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "akka.coordination.1.5.53.nupkg.sha512",
+        "akka.coordination.1.5.70.nupkg.sha512",
         "akka.coordination.nuspec",
         "akkalogo.png",
         "lib/net6.0/Akka.Coordination.dll",
@@ -752,15 +800,47 @@
         "lib/netstandard2.0/Akka.Hosting.dll"
       ]
     },
-    "Akka.Remote/1.5.53": {
-      "sha512": "JV/4OxoG9I2JZe3qu5x+FGdt4ZxNo/w5AGsyKvm0K4hjX3zIRSdz6obmuCarwjRetj/HCgAiolEiL22d/0EkSw==",
+    "Akka.Http.Shim/1.5.70": {
+      "sha512": "KDX49ziKaJVPXQ06MeqBSvVVMUSiBtXAh0T6IIVHqn6jPE75C/phaygIxilq1wW5Ofe3Np3g5MNWs38x96qrcQ==",
       "type": "package",
-      "path": "akka.remote/1.5.53",
+      "path": "akka.http.shim/1.5.70",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "akka.remote.1.5.53.nupkg.sha512",
+        "akka.http.shim.1.5.70.nupkg.sha512",
+        "akka.http.shim.nuspec",
+        "lib/net6.0/Akka.Http.Shim.dll",
+        "lib/net6.0/Akka.Http.Shim.xml",
+        "lib/netstandard2.0/Akka.Http.Shim.dll",
+        "lib/netstandard2.0/Akka.Http.Shim.xml"
+      ]
+    },
+    "Akka.Management/1.5.70": {
+      "sha512": "vsKJxU86NwueWRJC/izpBhBUUQSsLuuKt5IuUjeAaZqZPYokT/Dn2sNufRbq7Nz8IBQr4nG+lMK1vi/qyISxhA==",
+      "type": "package",
+      "path": "akka.management/1.5.70",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "akka.management.1.5.70.nupkg.sha512",
+        "akka.management.nuspec",
+        "lib/net6.0/Akka.Management.dll",
+        "lib/net6.0/Akka.Management.xml",
+        "lib/netstandard2.0/Akka.Management.dll",
+        "lib/netstandard2.0/Akka.Management.xml"
+      ]
+    },
+    "Akka.Remote/1.5.70": {
+      "sha512": "SNP97A8+MFQ3eKdCcOjA+KKX/LCMIKV4+RHX4I7MtcjUTzcHcXss4yV3B0+t7EpqhkrgEpJlKjvxwmehFecuiA==",
+      "type": "package",
+      "path": "akka.remote/1.5.70",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "akka.remote.1.5.70.nupkg.sha512",
         "akka.remote.nuspec",
         "akkalogo.png",
         "lib/net6.0/Akka.Remote.dll",
@@ -784,6 +864,19 @@
         "lib/net6.0/Akka.Streams.xml",
         "lib/netstandard2.0/Akka.Streams.dll",
         "lib/netstandard2.0/Akka.Streams.xml"
+      ]
+    },
+    "Ceen.Httpd/0.9.9": {
+      "sha512": "nzjWihqdQBJUrGlDWx4711aG5A2P0Pmz/5n5RCsTZUdOUfZZdk3lPHVI+1rtwSzt9F4REZ05nF765nFp8YzYGg==",
+      "type": "package",
+      "path": "ceen.httpd/0.9.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ceen.httpd.0.9.9.nupkg.sha512",
+        "ceen.httpd.nuspec",
+        "lib/netstandard2.0/Ceen.Common.dll",
+        "lib/netstandard2.0/Ceen.Httpd.dll"
       ]
     },
     "DotNetty.Buffers/0.7.6": {
@@ -1400,6 +1493,7 @@
     "net10.0": [
       "Akka.Discovery.KubernetesApi >= 1.5.70",
       "Akka.Hosting >= 1.5.70",
+      "Akka.Management >= 1.5.70",
       "Microsoft.AspNetCore.OpenApi >= 10.0.11",
       "Microsoft.AspNetCore.SpaProxy >= 10.*-*",
       "Petabridge.Cmd.Cluster >= 1.5.0",
@@ -1463,6 +1557,10 @@
             "version": "[1.5.70, )"
           },
           "Akka.Hosting": {
+            "target": "Package",
+            "version": "[1.5.70, )"
+          },
+          "Akka.Management": {
             "target": "Package",
             "version": "[1.5.70, )"
           },

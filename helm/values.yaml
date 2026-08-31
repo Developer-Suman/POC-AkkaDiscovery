@@ -4,36 +4,26 @@
 
 image:
   #repository: localhost:32000
-  repository: artifactory.cotiviti.com/ppm-nucleus-docker/sandbox/cpe
-  tag: 2026.3.4-alpha.CPP-52910-akka-hosting.17
+  repository: artifactory.cotiviti.com/adlm-sandbox-docker/sandbox/poc
+  tag: latest
 
 secrets:
-  - name: tns
-    enabled: true
-    data:
-      tnsnames.ora: REJRQT0oREVTQ1JJUFRJT049KEFERFJFU1M9KFBST1RPQ09MPVRDUCkoSE9TVD0xMC4xMjguMTk0LjIwNCkoUE9SVD0xNTIxKSkoQ09OTkVDVF9EQVRBPShTRVJWRVI9ZGVkaWNhdGVkKShTRVJWSUNFX05BTUU9ZGJxYSkpKQ0KUU5VQ0E9KERFU0NSSVBUSU9OPShBRERSRVNTPShQUk9UT0NPTD1UQ1ApKEhPU1Q9MTAuMTI4LjE5NC4yMDQpKFBPUlQ9MTUyMSkpKENPTk5FQ1RfREFUQT0oU0VSVkVSPWRlZGljYXRlZCkoU0VSVklDRV9OQU1FPXFudWNhLmhjaW5zaWdodC5uZXQpKSkNCg==
-
   - name: secrets
     enabled: true
-    data:
-      OracleSettings__Connection__Password: bW9uZGF5
+    data: {}
 
 appsettings:
-
-  TNS_ADMIN: "/tns"
-
-  # BatchPortal, BatchProcessor, CpeServiceWebApi, EditorService
-  OracleSettings__Connection__DataSource: "QNUCA"
+  # BatchPortal, BatchProcessor, EditorService
   Logging__LogLevel__Default: "Debug"
-  Logging__LogLevel__Microsoft: "Information"
   RedisConfiguration__PoolSize: "2"
   RedisConfiguration__Hosts__0__Host: "w1q01-cpered01.mediconnect.net"
   RedisConfiguration__Hosts__0__Port: "6379"
-  redisConfiguration__Hosts__1__Host: "w1q01-cpered01.mediconnect.net"
+  RedisConfiguration__Hosts__1__Host: "w1q01-cpered01.mediconnect.net"
   RedisConfiguration__Hosts__1__Port: "6380"
+  RedisConfiguration__Password: "ubYFiiG1DjO4"
+  Logging__LogLevel__Microsoft: "Information"
   ApplicationSettings__SupportEmail: "cpe_dev@cotiviti.com"
   ApplicationSettings__KibanaCorrelationIdUrl: ""
-  RedisConfiguration__Password: "ubYFiiG1DjO4"
   ApplicationSettings__AesKey: "496F3491AA7B8CE9AAD8BE64A72BBDC4" #"496F3491AA7B8CE9AAD8BE64A72BBDC4"
 
   # BatchProcessor
@@ -43,28 +33,30 @@ appsettings:
   ApplicationSettings__PgpInternalEncryptFingerprint: "" #"FFAF41393F81A6D7C49E8AB7334A3C7497C8699E"
   ApplicationSettings__ReturnFilePickupLocation: "" #"\\\\W1Q01-CPEBP01.mediconnect.net\\shared\\batch-processing"
 
-  # BatchPortal and CpeServiceWebApi
+  # BatchPortal
   ApplicationSettings__AllowBatchSeqInput: "true"
   ASPNETCORE_URLS: http://*:8080
   ASPNETCORE_HTTP_PORT: "8080"
   # ASPNETCORE_HTTPS_PORT: "8081"
 
 akkaOptions:
-  clusterName: "BatchProcessingSystem"
+  clusterName: "FraudDetectionActorSystem"
   remoteOptions:
     hostName: "0.0.0.0"
-    port: 0
-    publicPort: 0
+    port: 4051
+    publicPort: 4051
     sendBufferSize: "4096000"
     receiveBufferSize: "4096000"
     maxFrameSize: "4096000"
   clusterOptions:
-    logInfo: false
+    logInfo: true
     clusterReadyCheck: true
+    seedNodes:
+      - "akka.tcp://FraudDetectionActorSystem@cpe-poc-helm-batchportal.ppm-cpe-qa.svc.cluster.local:4051"
 
 lighthouse:
-  enabled: true
-  replicas: 2
+  enabled: false
+  replicas: 0
   logLevel: "Debug"
   resources:
     limits:
@@ -76,7 +68,7 @@ lighthouse:
 
 services:
   lighthouse:
-    enabled: true
+    enabled: false
     headless: true
     ports:
       akka: 4051
@@ -84,14 +76,23 @@ services:
   batchportal:
     enabled: true
     ports:
+      akka: 4051
       pbm: 9110
       http: 8080
-      # https: 8081
-  webapi:
+  editorservice:
     enabled: true
     ports:
-      http: 8080
-      # https: 8081
+      akka: 4051
+      pbm: 9110
+  batchprocessor:
+    enabled: true
+    ports:
+      akka: 4051
+      pbm: 9110
+
+service:
+  type: ClusterIP
+  port: 8080
 
 deployments:
   - name: batchportal
@@ -108,18 +109,6 @@ deployments:
       requests:
         cpu: 250m
         memory: 600Mi
-  - name: webapi
-    enabled: true
-    replicaCount: 4
-    ports:
-      http: 8080
-    resources:
-      limits:
-        cpu: 500m
-        memory: 500Mi
-      requests:
-        cpu: 400m
-        memory: 400Mi
   - name: editorservice
     enabled: true
     replicaCount: 4
@@ -158,8 +147,6 @@ route:
   routes:
     - name: batchportal
       host: cpe-batch-portal
-    - name: webapi
-      host: cpe-web-api
 
 
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
@@ -178,6 +165,9 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+httpRoute:
+  enabled: false
 
 # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
 serviceAccount:
@@ -239,7 +229,4 @@ volumes: []
 #     optional: false
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts:
-  - name: cpe-volume-tns
-    mountPath: /tns
-    readOnly: true
+volumeMounts: []

@@ -12,14 +12,23 @@ akka {
 
     kubernetes-api {
       class = "Akka.Discovery.KubernetesApi.KubernetesApiServiceDiscovery, Akka.Discovery.KubernetesApi"
-      pod-namespace = "default"
+      pod-namespace = "ppm-cpe-qa"
+      pod-label-selector = "app.kubernetes.io/instance=cpe-poc"
     }
   }
 
-  cluster.bootstrap.contact-point-discovery {
-    service-name = "nucleus-rule-services"
-    discovery-method = kubernetes-api
-    required-contact-point-nr = 3
+  management {
+    http {
+      hostname = "0.0.0.0"
+      port = 8558
+    }
+
+    cluster.bootstrap.contact-point-discovery {
+      service-name = "cpe-poc-helm-batchportal"
+      discovery-method = kubernetes-api
+      required-contact-point-nr = 1
+      contact-point-fallback-port = 8558
+    }
   }
 
   # Split Brain Resolver: automatically down unreachable nodes in a network partition.
