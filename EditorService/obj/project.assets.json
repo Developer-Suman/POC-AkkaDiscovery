@@ -3019,23 +3019,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\suman\\.nuget\\packages\\": {},
+    "C:\\Users\\sumanrai\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\WorkSpace\\Project\\POC-AkkaDiscovery\\EditorService\\EditorService.csproj",
+      "projectUniqueName": "C:\\workspace\\POC-AKKaDiscovery\\EditorService\\EditorService.csproj",
       "projectName": "EditorService",
-      "projectPath": "C:\\WorkSpace\\Project\\POC-AkkaDiscovery\\EditorService\\EditorService.csproj",
-      "packagesPath": "C:\\Users\\suman\\.nuget\\packages\\",
-      "outputPath": "C:\\WorkSpace\\Project\\POC-AkkaDiscovery\\EditorService\\obj\\",
+      "projectPath": "C:\\workspace\\POC-AKKaDiscovery\\EditorService\\EditorService.csproj",
+      "packagesPath": "C:\\Users\\sumanrai\\.nuget\\packages\\",
+      "outputPath": "C:\\workspace\\POC-AKKaDiscovery\\EditorService\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\suman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sumanrai\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3063,7 +3063,7 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.300"
+      "SdkAnalysisLevel": "10.0.400"
     },
     "frameworks": {
       "net10.0": {
@@ -3111,7 +3111,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
