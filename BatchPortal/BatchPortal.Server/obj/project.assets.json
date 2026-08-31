@@ -352,21 +352,6 @@
           "build/Microsoft.AspNetCore.OpenApi.targets": {}
         }
       },
-      "Microsoft.AspNetCore.SpaProxy/10.0.11": {
-        "type": "package",
-        "compile": {
-          "lib/net10.0/Microsoft.AspNetCore.SpaProxy.dll": {}
-        },
-        "runtime": {
-          "lib/net10.0/Microsoft.AspNetCore.SpaProxy.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ],
-        "build": {
-          "build/Microsoft.AspNetCore.SpaProxy.targets": {}
-        }
-      },
       "Microsoft.OpenApi/2.7.5": {
         "type": "package",
         "compile": {
@@ -1051,21 +1036,6 @@
         "microsoft.aspnetcore.openapi.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.SpaProxy/10.0.11": {
-      "sha512": "bu1oRqZVuvBXTXFMciLm57Gledjv6Y8veHmXtayLOjkoHm/2hNd35dZOA9hko6VQhmbQuPIQQNerbpJHyibzVw==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.spaproxy/10.0.11",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.TXT",
-        "build/Microsoft.AspNetCore.SpaProxy.targets",
-        "lib/net10.0/Microsoft.AspNetCore.SpaProxy.dll",
-        "microsoft.aspnetcore.spaproxy.10.0.11.nupkg.sha512",
-        "microsoft.aspnetcore.spaproxy.nuspec"
-      ]
-    },
     "Microsoft.OpenApi/2.7.5": {
       "sha512": "0FA67RSnRM4tcBKqiqVu/HPdZ9+QOKbmeRjxRUGTCjPU4C0bmUhd97Dso7Yild5P7nOV6GxJ2xrK0Kv/O9xp0w==",
       "type": "package",
@@ -1495,29 +1465,28 @@
       "Akka.Hosting >= 1.5.70",
       "Akka.Management >= 1.5.70",
       "Microsoft.AspNetCore.OpenApi >= 10.0.11",
-      "Microsoft.AspNetCore.SpaProxy >= 10.*-*",
       "Petabridge.Cmd.Cluster >= 1.5.0",
       "Petabridge.Cmd.Host >= 1.5.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\suman\\.nuget\\packages\\": {},
+    "C:\\Users\\sumanrai\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\WorkSpace\\Project\\POC-AkkaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj",
+      "projectUniqueName": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj",
       "projectName": "BatchPortal.Server",
-      "projectPath": "C:\\WorkSpace\\Project\\POC-AkkaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj",
-      "packagesPath": "C:\\Users\\suman\\.nuget\\packages\\",
-      "outputPath": "C:\\WorkSpace\\Project\\POC-AkkaDiscovery\\BatchPortal\\BatchPortal.Server\\obj\\",
+      "projectPath": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj",
+      "packagesPath": "C:\\Users\\sumanrai\\.nuget\\packages\\",
+      "outputPath": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\suman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sumanrai\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1545,7 +1514,7 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.300"
+      "SdkAnalysisLevel": "10.0.400"
     },
     "frameworks": {
       "net10.0": {
@@ -1567,10 +1536,6 @@
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[10.0.11, )"
-          },
-          "Microsoft.AspNetCore.SpaProxy": {
-            "target": "Package",
-            "version": "[10.*-*, )"
           },
           "Petabridge.Cmd.Cluster": {
             "target": "Package",
@@ -1600,7 +1565,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
