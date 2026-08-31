@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BatchPortal.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0731b357b2dc2b89984a0d5f4e129cdbf58c37f1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5da24c38b60c797b4537f7bdc433b1936729cbb")]
 [assembly: System.Reflection.AssemblyProductAttribute("BatchPortal.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BatchPortal.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
