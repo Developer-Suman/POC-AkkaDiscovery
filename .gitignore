@@ -17,3 +17,7 @@ src/CucumberUnitTests/**/*.feature.cs
 DBScripts_*.zip
 
 .idea/
+
+# .NET build output
+**/bin/
+**/obj/
