@@ -1,0 +1,74 @@
+{
+  "version": 2,
+  "dgSpecHash": "qgnZwMq98E0=",
+  "success": true,
+  "projectFilePath": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka\\1.5.70\\akka.1.5.70.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka.analyzers\\0.3.3\\akka.analyzers.0.3.3.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka.cluster\\1.5.70\\akka.cluster.1.5.70.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka.coordination\\1.5.70\\akka.coordination.1.5.70.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka.dependencyinjection\\1.5.70\\akka.dependencyinjection.1.5.70.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka.discovery\\1.5.70\\akka.discovery.1.5.70.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka.discovery.kubernetesapi\\1.5.70\\akka.discovery.kubernetesapi.1.5.70.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka.hosting\\1.5.70\\akka.hosting.1.5.70.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka.http.shim\\1.5.70\\akka.http.shim.1.5.70.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka.management\\1.5.70\\akka.management.1.5.70.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka.remote\\1.5.70\\akka.remote.1.5.70.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\akka.streams\\1.5.70\\akka.streams.1.5.70.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\ceen.httpd\\0.9.9\\ceen.httpd.0.9.9.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\dotnetty.buffers\\0.7.6\\dotnetty.buffers.0.7.6.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\dotnetty.codecs\\0.7.6\\dotnetty.codecs.0.7.6.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\dotnetty.common\\0.7.6\\dotnetty.common.0.7.6.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\dotnetty.handlers\\0.7.6\\dotnetty.handlers.0.7.6.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\dotnetty.transport\\0.7.6\\dotnetty.transport.0.7.6.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\fractions\\7.3.0\\fractions.7.3.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\kubernetesclient\\17.0.14\\kubernetesclient.17.0.14.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.11\\microsoft.aspnetcore.openapi.10.0.11.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\10.0.11\\microsoft.aspnetcore.spaproxy.10.0.11.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\microsoft.openapi\\2.7.5\\microsoft.openapi.2.7.5.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\opentelemetry\\1.10.0\\opentelemetry.1.10.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\opentelemetry.api\\1.10.0\\opentelemetry.api.1.10.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\opentelemetry.api.providerbuilderextensions\\1.10.0\\opentelemetry.api.providerbuilderextensions.1.10.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\petabridge.cmd.cluster\\1.5.0\\petabridge.cmd.cluster.1.5.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\petabridge.cmd.common\\1.5.0\\petabridge.cmd.common.1.5.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\petabridge.cmd.host\\1.5.0\\petabridge.cmd.host.1.5.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\phobos.actor.common\\1.1.2\\phobos.actor.common.1.1.2.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\reactive.streams\\1.0.4\\reactive.streams.1.0.4.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.1\\system.configuration.configurationmanager.6.0.1.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\system.security.cryptography.protecteddata\\6.0.0\\system.security.cryptography.protecteddata.6.0.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\system.security.permissions\\6.0.0\\system.security.permissions.6.0.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
+    "C:\\Users\\sumanrai\\.nuget\\packages\\yamldotnet\\16.3.0\\yamldotnet.16.3.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "message": "Package 'OpenTelemetry.Api' 1.10.0 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-8785-wc3w-h8q6",
+      "projectPath": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj",
+      "libraryId": "OpenTelemetry.Api",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "message": "Package 'OpenTelemetry.Api' 1.10.0 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-g94r-2vxg-569j",
+      "projectPath": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\workspace\\POC-AKKaDiscovery\\BatchPortal\\BatchPortal.Server\\BatchPortal.Server.csproj",
+      "libraryId": "OpenTelemetry.Api",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}

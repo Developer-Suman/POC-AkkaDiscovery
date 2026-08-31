@@ -5,7 +5,6 @@ metadata:
   labels:
     {{- include "cpe.labels" . | nindent 4 }}
 data:
-  # Lighthouse env vars (consumed via HOCON)
   LOG_LEVEL: {{ .Values.lighthouse.logLevel }}
   CLUSTER_PORT: "{{ .Values.services.lighthouse.ports.akka }}"
   PETABRIDGE_PORT: "{{ .Values.services.lighthouse.ports.pbm }}"
@@ -20,5 +19,7 @@ data:
   AkkaOptions__RemoteOptions__MaxFrameSize: "{{ .Values.akkaOptions.remoteOptions.maxFrameSize }}"
   AkkaOptions__ClusterOptions__LogInfo: "{{ .Values.akkaOptions.clusterOptions.logInfo }}"
   AkkaOptions__ClusterOptions__ClusterReadyCheck: "{{ .Values.akkaOptions.clusterOptions.clusterReadyCheck }}"
+  {{- range $i, $node := .Values.akkaOptions.clusterOptions.seedNodes }}
+  AkkaOptions__ClusterOptions__SeedNodes__{{ $i }}: {{ $node | quote }}
+  {{- end }}
   {{- include "cpe.akkaOptionsSeedNodes" . | nindent 2 }}
-

@@ -60,6 +60,10 @@
               "target": "Package",
               "version": "[1.5.70, )"
             },
+            "Akka.Management": {
+              "target": "Package",
+              "version": "[1.5.70, )"
+            },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
               "version": "[10.0.11, )"

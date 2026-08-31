@@ -1,12 +1,12 @@
 # Stage 1: Base runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
+FROM artifactory.cotiviti.com/docker/dotnet/aspnet:10.0 AS base
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
 # Stage 2: Build Angular client
-FROM node:lts AS build-angular
+FROM artifactory.cotiviti.com/docker/node:lts AS build-angular
 ARG NPM_BUILD_COMMAND="build"
 WORKDIR /src
 COPY ["BatchPortal/batchportal.client/package*.json", "./"]
@@ -15,7 +15,7 @@ COPY ["BatchPortal/batchportal.client/.", "./"]
 RUN npm run $NPM_BUILD_COMMAND
 
 # Stage 3: Build .NET server
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+FROM artifactory.cotiviti.com/docker/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["BatchPortal/BatchPortal.Server/BatchPortal.Server.csproj", "BatchPortal/BatchPortal.Server/"]

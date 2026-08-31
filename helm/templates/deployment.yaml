@@ -28,9 +28,9 @@ spec:
             - secretRef:
                 name: {{ include "cpe.fullname" $ }}-secrets
             - configMapRef:
-            name: {{ include "cpe.fullname" $ }}-env-variables
+                name: {{ include "cpe.fullname" $ }}-env-variables
             - configMapRef:
-            name: {{ include "cpe.fullname" $ }}-akka-variables
+                name: {{ include "cpe.fullname" $ }}-akka-variables
           env:
             {{- if .env }}
             {{- toYaml .env | nindent 12 }}
@@ -53,15 +53,16 @@ spec:
             - name: Logging__LogLevel__Akka
               value: "Debug"
 
+          {{- if $.Values.volumeMounts }}
           volumeMounts:
             {{- toYaml $.Values.volumeMounts | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .resources | nindent 12 }}
+      {{- if $.Values.volumes }}
       volumes:
-        - name: cpe-volume-tns
-          secret:
-            secretName: {{ include "cpe.fullname" $ }}-tns
-            optional: false
+        {{- toYaml $.Values.volumes | nindent 8 }}
+      {{- end }}
 ---
 {{- end }}
   {{- end }}

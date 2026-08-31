@@ -60,3 +60,47 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Aliases and CPE-specific helpers expected by templates.
+*/}}
+{{- define "cpe.name" -}}
+{{- include "helm.name" . -}}
+{{- end }}
+
+{{- define "cpe.fullname" -}}
+{{- include "helm.fullname" . -}}
+{{- end }}
+
+{{- define "cpe.chart" -}}
+{{- include "helm.chart" . -}}
+{{- end }}
+
+{{- define "cpe.labels" -}}
+{{- include "helm.labels" . -}}
+{{- end }}
+
+{{- define "cpe.selectorLabels" -}}
+{{- include "helm.selectorLabels" . -}}
+{{- end }}
+
+{{- define "cpe.serviceAccountName" -}}
+{{- include "helm.serviceAccountName" . -}}
+{{- end }}
+
+{{- define "cpe.lighthouseSeedNodes" -}}
+{{- if .Values.lighthouse.enabled -}}
+{{- $clusterName := .Values.akkaOptions.clusterName -}}
+{{- $clusterPort := .Values.services.lighthouse.ports.akka -}}
+{{- $seedHost := printf "%s-lighthouse" (include "cpe.fullname" .) -}}
+{{- printf "akka.tcp://%s@%s:%v" $clusterName $seedHost $clusterPort | quote -}}
+{{- else -}}
+""
+{{- end -}}
+{{- end }}
+
+{{- define "cpe.akkaOptionsSeedNodes" -}}
+{{- if .Values.lighthouse.enabled }}
+AkkaOptions__ClusterOptions__SeedNodes__0: {{ printf "akka.tcp://%s@%s-lighthouse:%v" .Values.akkaOptions.clusterName (include "cpe.fullname" .) .Values.services.lighthouse.ports.akka | quote }}
+{{- end }}
+{{- end }}
