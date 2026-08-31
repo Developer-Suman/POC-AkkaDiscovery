@@ -8,7 +8,6 @@ FROM artifactory.cotiviti.com/docker/dotnet/runtime:10.0 AS base
 USER $APP_UID
 WORKDIR /app
 
-
 # This stage is used to build the service project
 FROM artifactory.cotiviti.com/docker/dotnet/sdk:10.0 AS build
 
@@ -16,11 +15,12 @@ ARG BUILD_CONFIGURATION=Release
 
 WORKDIR /src
 
-COPY ["EditorService.csproj", "./"]
+COPY ["EditorService/EditorService.csproj", "EditorService/"]
 
-RUN dotnet restore "./EditorService.csproj"
+RUN dotnet restore "./EditorService/EditorService.csproj"
 
 COPY . .
+WORKDIR "/src/EditorService"
 
 RUN dotnet build "./EditorService.csproj" \
     -c $BUILD_CONFIGURATION \
