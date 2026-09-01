@@ -7,7 +7,6 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-
 # Stage 2: Build Angular client
 FROM artifactory.cotiviti.com/docker/node:lts AS build-angular
 
@@ -34,15 +33,19 @@ WORKDIR /src
 
 COPY ["BatchPortal.Server/BatchPortal.Server.csproj", "BatchPortal.Server/"]
 
-RUN dotnet restore "BatchPortal.Server/BatchPortal.Server.csproj" /p:BuildClientProject=false
+# Do not build the Angular client while building the .NET server
+RUN dotnet restore "BatchPortal.Server/BatchPortal.Server.csproj" \
+    /p:BuildClientProject=false
 
 COPY . .
 
 WORKDIR "/src/BatchPortal.Server"
 
+# Important: same skip flag here
 RUN dotnet build "BatchPortal.Server.csproj" \
     -c $BUILD_CONFIGURATION \
-    -o /app/build
+    -o /app/build \
+    /p:BuildClientProject=false
 
 
 # Stage 4: Publish
@@ -55,7 +58,8 @@ COPY --from=build-angular /src/dist/batchportal.client/browser/. ./wwwroot/
 RUN dotnet publish "BatchPortal.Server.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/publish \
-    /p:UseAppHost=false
+    /p:UseAppHost=false \
+    /p:BuildClientProject=false
 
 
 # Stage 5: Final production image
