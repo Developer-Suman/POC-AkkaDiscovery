@@ -54,25 +54,7 @@ akkaOptions:
     seedNodes:
       - "akka.tcp://FraudDetectionActorSystem@cpe-poc-helm-batchportal.ppm-cpe-qa.svc.cluster.local:4051"
 
-lighthouse:
-  enabled: false
-  replicas: 0
-  logLevel: "Debug"
-  resources:
-    limits:
-      cpu: 50m
-      memory: 500Mi
-    requests:
-      cpu: 30m
-      memory: 150Mi
-
 services:
-  lighthouse:
-    enabled: false
-    headless: true
-    ports:
-      akka: 4051
-      pbm: 9110
   batchportal:
     enabled: true
     ports:

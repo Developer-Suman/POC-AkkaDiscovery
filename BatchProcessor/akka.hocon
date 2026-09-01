@@ -1,7 +1,6 @@
 akka {
   actor.provider = cluster
 
-  # Production: bind to all interfaces so Kubernetes can route traffic
   remote.dot-netty.tcp {
     hostname = "0.0.0.0"
     port = 4053
@@ -12,7 +11,7 @@ akka {
 
     kubernetes-api {
       class = "Akka.Discovery.KubernetesApi.KubernetesApiServiceDiscovery, Akka.Discovery.KubernetesApi"
-      pod-namespace = "default"
+      pod-namespace = "ppm-cpe-qa"
     }
   }
 
@@ -22,15 +21,11 @@ akka {
     required-contact-point-nr = 3
   }
 
-  # Split Brain Resolver: automatically down unreachable nodes in a network partition.
-  # keep-majority keeps the partition with more nodes; the minority partition downs itself.
   cluster {
     downing-provider-class = "Akka.Cluster.SBR.SplitBrainResolverProvider, Akka.Cluster"
     split-brain-resolver {
       active-strategy = keep-majority
-      # Wait for cluster to be stable before acting on unreachable nodes
       stable-after = 20s
-      # If instability persists beyond stable-after + this duration, down all nodes
       down-all-when-unstable = on
     }
   }
