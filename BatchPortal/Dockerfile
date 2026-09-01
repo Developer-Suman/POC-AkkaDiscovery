@@ -8,7 +8,7 @@ EXPOSE 8080
 EXPOSE 8081
 
 # Stage 2: Build Angular client
-FROM artifactory.cotiviti.com/docker/node:lts AS build-angular
+FROM artifactory.cotiviti.com/docker/node:22-bookworm-slim AS build-angular
 
 ARG NPM_BUILD_COMMAND="build"
 
@@ -20,8 +20,6 @@ RUN npm ci
 COPY ["batchportal.client/.", "./"]
 RUN npm run $NPM_BUILD_COMMAND
 
-RUN rm -rf bin obj
-
 # Stage 3: Build .NET server
 FROM artifactory.cotiviti.com/docker/dotnet/sdk:10.0 AS build
 
@@ -29,10 +27,10 @@ ARG BUILD_CONFIGURATION=Release
 
 WORKDIR /src
 
-# Install Node.js because the .NET project may still invoke the client build
+# Install Node 22 in the .NET build stage as well
 RUN apt-get update && \
     apt-get install -y curl ca-certificates && \
-    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
     apt-get install -y nodejs
 
 COPY ["BatchPortal.Server/BatchPortal.Server.csproj", "BatchPortal.Server/"]
@@ -44,7 +42,8 @@ WORKDIR "/src/BatchPortal.Server"
 
 RUN dotnet build "BatchPortal.Server.csproj" \
     -c $BUILD_CONFIGURATION \
-    -o /app/build
+    -o /app/build \
+    /p:BuildClientProject=false
 
 # Stage 4: Publish
 FROM build AS publish
@@ -56,7 +55,8 @@ COPY --from=build-angular /src/dist/batchportal.client/browser/. ./wwwroot/
 RUN dotnet publish "BatchPortal.Server.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/publish \
-    /p:UseAppHost=false
+    /p:UseAppHost=false \
+    /p:BuildClientProject=false
 
 # Stage 5: Final production image
 FROM base AS final
