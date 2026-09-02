@@ -5,4 +5,4 @@ metadata:
   labels:
     {{- include "cpe.labels" . | nindent 4 }}
 data:
-  {{- toYaml .Values.appsettings | nindent 2 }}
+{{- toYaml .Values.appsettings | nindent 2 }}

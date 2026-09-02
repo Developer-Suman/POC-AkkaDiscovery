@@ -3,7 +3,11 @@ using Akka.Hosting;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-builder.Services.AddAkka("FraudDetectionActorSystem", (akkaBuilder, provider) =>
+var actorSystemName = builder.Configuration["AkkaOptions:ClusterName"] is { Length: > 0 } clusterName
+    ? clusterName
+    : "FraudDetectionActorSystem";
+
+builder.Services.AddAkka(actorSystemName, (akkaBuilder, provider) =>
 {
     // Load base config (production/Kubernetes)
     var hoconPath = Path.Combine(builder.Environment.ContentRootPath, "akka.hocon");
@@ -17,6 +21,14 @@ builder.Services.AddAkka("FraudDetectionActorSystem", (akkaBuilder, provider) =>
     if (File.Exists(envHoconPath))
     {
         akkaBuilder.AddHocon(File.ReadAllText(envHoconPath), HoconAddMode.Prepend);
+    }
+
+    // AkkaOptions__* env vars (set by the Helm chart — e.g. the pod's own IP for
+    // remote.public-hostname) always win: prepended last, after the file-based config.
+    var overrideHocon = AkkaOptionsHocon.Build(builder.Configuration);
+    if (!string.IsNullOrWhiteSpace(overrideHocon))
+    {
+        akkaBuilder.AddHocon(overrideHocon, HoconAddMode.Prepend);
     }
 });
 

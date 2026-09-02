@@ -60,3 +60,42 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Alias helpers for legacy templates that reference "cpe.*" helper names.
+These delegate to the canonical "helm.*" helpers defined above.
+*/}}
+{{- define "cpe.name" -}}
+{{- include "helm.name" . -}}
+{{- end }}
+
+{{- define "cpe.fullname" -}}
+{{- include "helm.fullname" . -}}
+{{- end }}
+
+{{- define "cpe.chart" -}}
+{{- include "helm.chart" . -}}
+{{- end }}
+
+{{- define "cpe.labels" -}}
+{{- include "helm.labels" . -}}
+{{- end }}
+
+{{- define "cpe.selectorLabels" -}}
+{{- include "helm.selectorLabels" . -}}
+{{- end }}
+
+{{- define "cpe.serviceAccountName" -}}
+{{- include "helm.serviceAccountName" . -}}
+{{- end }}
+
+
+{{/*
+Stub for akkaOptions seed nodes helper: return empty string or configured value
+*/}}
+{{- define "cpe.akkaOptionsSeedNodes" -}}
+{{- $ao := index .Values "akkaOptions" -}}
+{{- if and $ao (index $ao "seedNodes") -}}
+AkkaOptions__SeedNodes: {{ printf "%q" (index $ao "seedNodes") }}
+{{- end -}}
+{{- end }}
