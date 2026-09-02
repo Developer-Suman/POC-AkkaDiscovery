@@ -1,0 +1,281 @@
+---
+# Source: helm/templates/secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: myrelease-helm-secrets
+  labels:
+    helm.sh/chart: helm-0.1.0
+    app.kubernetes.io/name: helm
+    app.kubernetes.io/instance: myrelease
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+type: Opaque
+data:
+    {}
+---
+# Source: helm/templates/akka-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myrelease-helm-akka-conf
+data:
+  akka.hocon: |
+    akka {
+      actor.provider = cluster
+      remote.dot-netty.tcp {
+        hostname = "0.0.0.0"
+        port = 4051
+      }
+      discovery {
+        method = kubernetes-api
+        kubernetes-api {
+          class = "Akka.Discovery.KubernetesApi.KubernetesApiServiceDiscovery, Akka.Discovery.KubernetesApi"
+          pod-namespace = "ppm-cpe-qa"
+        }
+      }
+      cluster.bootstrap.contact-point-discovery {
+        service-name = "myrelease-helm-akka"
+        discovery-method = kubernetes-api
+        required-contact-point-nr = 1
+      }
+      cluster {
+        downing-provider-class = "Akka.Cluster.SBR.SplitBrainResolverProvider, Akka.Cluster"
+        split-brain-resolver {
+          active-strategy = keep-majority
+          stable-after = 20s
+          down-all-when-unstable = on
+        }
+      }
+    }
+
+---
+# Source: helm/templates/configmap-akka.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myrelease-helm-akka-variables
+  labels:
+    
+    helm.sh/chart: helm-0.1.0
+    app.kubernetes.io/name: helm
+    app.kubernetes.io/instance: myrelease
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+data:
+
+  # Seed nodes (from akkaOptions if configured)
+  SEED_NODES: ''
+
+  # AkkaOptions for .NET Akka services (modern/configurable)
+  AkkaOptions__ClusterName: 'FraudDetectionActorSystem'
+  AkkaOptions__RemoteOptions__HostName: '0.0.0.0'
+  AkkaOptions__RemoteOptions__Port: '4051'
+  AkkaOptions__RemoteOptions__PublicPort: '4051'
+  AkkaOptions__RemoteOptions__SendBufferSize: '4096000'
+  AkkaOptions__RemoteOptions__ReceiveBufferSize: '4096000'
+  AkkaOptions__RemoteOptions__MaxFrameSize: '4096000'
+  AkkaOptions__ClusterOptions__LogInfo: 'true'
+  AkkaOptions__ClusterOptions__ClusterReadyCheck: 'true'
+
+  # Akka cluster bootstrap discovery via Kubernetes API/headless service
+  AkkaOptions__Discovery__Method: "kubernetes-api"
+  AkkaOptions__Cluster__Bootstrap__ContactPointDiscovery__ServiceName: 'myrelease-helm-akka'
+  AkkaOptions__Cluster__Bootstrap__ContactPointDiscovery__RequiredContactPointNr: '1'
+
+  # Additional seed nodes helper (optional, if you use a custom helper)
+  
+  
+
+---
+# Source: helm/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myrelease-helm-env-variables
+  labels:
+    helm.sh/chart: helm-0.1.0
+    app.kubernetes.io/name: helm
+    app.kubernetes.io/instance: myrelease
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+data:
+  ASPNETCORE_HTTP_PORT: "8080"
+  ASPNETCORE_URLS: http://*:8080
+  ApplicationSettings__AesKey: 496F3491AA7B8CE9AAD8BE64A72BBDC4
+  ApplicationSettings__AllowBatchSeqInput: "true"
+  ApplicationSettings__DispatcherChunkSize: "80"
+  ApplicationSettings__KibanaCorrelationIdUrl: ""
+  ApplicationSettings__PgpInternalEncryptFingerprint: ""
+  ApplicationSettings__PgpKeyLocation: ""
+  ApplicationSettings__RecurringMessageInterval: "60"
+  ApplicationSettings__ReturnFilePickupLocation: ""
+  ApplicationSettings__SupportEmail: cpe_dev@cotiviti.com
+  Logging__LogLevel__Default: Debug
+  Logging__LogLevel__Microsoft: Information
+  RedisConfiguration__Hosts__0__Host: w1q01-cpered01.mediconnect.net
+  RedisConfiguration__Hosts__0__Port: "6379"
+  RedisConfiguration__Hosts__1__Host: w1q01-cpered01.mediconnect.net
+  RedisConfiguration__Hosts__1__Port: "6380"
+  RedisConfiguration__Password: ubYFiiG1DjO4
+  RedisConfiguration__PoolSize: "2"
+
+---
+# Source: helm/templates/service-akka-headless.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nucleus-rule-services
+spec:
+  clusterIP: None
+  selector:
+    app:  # e.g., app: nucleus-rule-services
+  ports:
+    - name: akka-4053
+      port: 4053
+      targetPort: 4053
+    - name: akka-4054
+      port: 4054
+      targetPort: 4054
+    - name: akka-4055
+      port: 4055
+      targetPort: 4055
+
+---
+# Source: helm/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: myrelease-helm-batchportal
+  labels:
+    app: myrelease-helm-batchportal
+    helm.sh/chart: helm-0.1.0
+    app.kubernetes.io/name: helm
+    app.kubernetes.io/instance: myrelease
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  selector:
+    app: myrelease-helm-batchportal
+  ports:
+    - name: akka
+      port: 4051
+      targetPort: 4051
+      protocol: TCP
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+    - name: pbm
+      port: 9110
+      targetPort: 9110
+      protocol: TCP
+---
+# Source: helm/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: myrelease-helm-batchprocessor
+  labels:
+    app: myrelease-helm-batchprocessor
+    helm.sh/chart: helm-0.1.0
+    app.kubernetes.io/name: helm
+    app.kubernetes.io/instance: myrelease
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  selector:
+    app: myrelease-helm-batchprocessor
+  ports:
+    - name: akka
+      port: 4051
+      targetPort: 4051
+      protocol: TCP
+    - name: pbm
+      port: 9110
+      targetPort: 9110
+      protocol: TCP
+---
+# Source: helm/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: myrelease-helm-editorservice
+  labels:
+    app: myrelease-helm-editorservice
+    helm.sh/chart: helm-0.1.0
+    app.kubernetes.io/name: helm
+    app.kubernetes.io/instance: myrelease
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  selector:
+    app: myrelease-helm-editorservice
+  ports:
+    - name: akka
+      port: 4051
+      targetPort: 4051
+      protocol: TCP
+    - name: pbm
+      port: 9110
+      targetPort: 9110
+      protocol: TCP
+---
+# Source: helm/templates/deployment.yaml
+volumeMounts:
+  - name: akka-conf
+    mountPath: /app/akka.hocon
+    subPath: akka.hocon
+volumes:
+  - name: akka-conf
+    configMap:
+      name: myrelease-helm-akka-conf
+      optional: false
+
+---
+# Source: helm/templates/route.yaml
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: myrelease-helm-batchportal
+  labels:
+    helm.sh/chart: helm-0.1.0
+    app.kubernetes.io/name: helm
+    app.kubernetes.io/instance: myrelease
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  to:
+    kind: Service
+    name: myrelease-helm-batchportal
+  port:
+    targetPort: http
+  host: cpe-batch-portal-myrelease-helm.apps.openshift-nonprod.cotiviti.com
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+---
+# Source: helm/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "myrelease-helm-test-connection"
+  labels:
+    helm.sh/chart: helm-0.1.0
+    app.kubernetes.io/name: helm
+    app.kubernetes.io/instance: myrelease
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['myrelease-helm:8080']
+  restartPolicy: Never
+

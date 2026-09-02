@@ -7,9 +7,9 @@ metadata:
 spec:
   clusterIP: None
   selector:
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    {{- include "cpe.selectorLabels" . | nindent 4 }}
   ports:
-    - name: akka
+    - name: akka-4051
       port: {{ .Values.akkaOptions.remoteOptions.port | default 4051 }}
       targetPort: {{ .Values.akkaOptions.remoteOptions.port | default 4051 }}
       protocol: TCP

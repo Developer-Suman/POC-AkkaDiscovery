@@ -39,6 +39,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+            - name: AkkaOptions__Discovery__KubernetesApi__PodNamespace
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
 {{- if $d.akkaRole }}
             - name: AkkaOptions__ClusterOptions__Roles__0
               value: {{ $d.akkaRole | quote }}
