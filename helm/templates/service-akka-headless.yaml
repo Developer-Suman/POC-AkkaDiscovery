@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "cpe.fullname" . }}-akka
+  labels:
+    {{ include "cpe.labels" . | nindent 4 }}
+spec:
+  clusterIP: None
+  selector:
+    app: {{ printf "%s-%s" (include "cpe.fullname" .) "batchportal" }}
+  ports:
+    - name: akka
+      port: 4051
+      targetPort: 4051
+      protocol: TCP

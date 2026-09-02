@@ -1,67 +1,72 @@
-{{- range .Values.deployments }}
-  {{- if .enabled }}
+{{- range $idx, $d := .Values.deployments }}
+{{- if $d.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ printf "%s-%s" (include "cpe.fullname" $) .name }}
+  name: {{ printf "%s-%s" (include "cpe.fullname" $) $d.name }}
 spec:
-  replicas: {{ .replicaCount }}
+  replicas: {{ $d.replicaCount }}
   selector:
     matchLabels:
-      app: {{ printf "%s-%s" (include "cpe.fullname" $) .name }}
+      app: {{ printf "%s-%s" (include "cpe.fullname" $) $d.name }}
   template:
     metadata:
       labels:
-        app: {{ printf "%s-%s" (include "cpe.fullname" $) .name }}
+        app: {{ printf "%s-%s" (include "cpe.fullname" $) $d.name }}
         {{- include "cpe.labels" $ | nindent 8 }}
     spec:
       containers:
-        - name: {{ printf "%s-%s" (include "cpe.fullname" $) .name }}
-          image: {{ printf "%s/%s:%s" $.Values.image.repository .name $.Values.image.tag }}
+        - name: {{ printf "%s-%s" (include "cpe.fullname" $) $d.name }}
+          image: {{ printf "%s/%s:%s" $.Values.image.repository $d.name $.Values.image.tag }}
           imagePullPolicy: IfNotPresent
           ports:
-            {{- range $portName, $port := .ports }}
-            - containerPort: {{ $port }}
-              name: {{ $portName }}
-            {{- end }}
+{{- range $pname, $p := $d.ports }}
+            - containerPort: {{ $p }}
+              name: {{ $pname }}
+{{- end }}
           envFrom:
             - secretRef:
                 name: {{ include "cpe.fullname" $ }}-secrets
             - configMapRef:
-            name: {{ include "cpe.fullname" $ }}-env-variables
-            - configMapRef:
-            name: {{ include "cpe.fullname" $ }}-akka-variables
+                name: {{ include "cpe.fullname" $ }}-env-variables
           env:
-            {{- if .env }}
-            {{- toYaml .env | nindent 12 }}
-            {{- end }}
-
+{{- if $d.env }}
+{{ toYaml $d.env | indent 12 }}
+{{- end }}
             - name: AkkaOptions__RemoteOptions__PublicHostName
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-            {{- if .akkaRole }}
+{{- if $d.akkaRole }}
             - name: AkkaOptions__ClusterOptions__Roles__0
-              value: {{ .akkaRole | quote }}
-            {{- end }}
-            {{- if .ports.pbm }}
+              value: {{ $d.akkaRole | quote }}
+{{- end }}
+{{- if $d.ports.pbm }}
             - name: AkkaOptions__PetabridgeOptions__Port
-              value: "{{ .ports.pbm }}"
+              value: "{{ $d.ports.pbm }}"
             - name: AkkaOptions__PetabridgeOptions__Host
               value: "0.0.0.0"
-            {{- end }}
+{{- end }}
             - name: Logging__LogLevel__Akka
               value: "Debug"
-
           volumeMounts:
-            {{- toYaml $.Values.volumeMounts | nindent 12 }}
+{{- if $.Values.volumeMounts }}
+{{ toYaml $.Values.volumeMounts | indent 12 }}
+{{- end }}
+            - name: akka-conf
+              mountPath: /app/akka.hocon
+              subPath: akka.hocon
           resources:
-            {{- toYaml .resources | nindent 12 }}
+{{ toYaml $d.resources | indent 12 }}
       volumes:
         - name: cpe-volume-tns
           secret:
             secretName: {{ include "cpe.fullname" $ }}-tns
             optional: false
+        - name: akka-conf
+          configMap:
+            name: {{ include "cpe.fullname" $ }}-akka-conf
+            optional: true
 ---
 {{- end }}
-  {{- end }}
+{{- end }}

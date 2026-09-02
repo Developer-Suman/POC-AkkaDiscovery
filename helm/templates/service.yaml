@@ -8,9 +8,9 @@ metadata:
     app: {{ printf "%s-%s" (include "cpe.fullname" $) $svcName }}
     {{- include "cpe.labels" $ | nindent 4 }}
 spec:
-  type: ClusterIP
-  {{- if .headless }}
-  clusterIP: None # Headless service
+  type: {{ $svc.type | default "ClusterIP" }}
+  {{- if $svc.headless }}
+  clusterIP: None
   {{- end }}
   selector:
     app: {{ printf "%s-%s" (include "cpe.fullname" $) $svcName }}
