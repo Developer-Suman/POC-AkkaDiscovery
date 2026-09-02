@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ printf "%s-akka-conf" (include "cpe.fullname" .) }}
+  name: {{ include "cpe.fullname" . }}-akka-conf
 data:
   akka.hocon: |
     akka {
@@ -9,7 +9,7 @@ data:
 
       remote.dot-netty.tcp {
         hostname = "0.0.0.0"
-        port = {{ .Values.akkaOptions.remoteOptions.port }}
+        port = {{ .Values.akkaOptions.remoteOptions.port | default 4051 }}
       }
 
       discovery {
@@ -24,7 +24,7 @@ data:
       cluster.bootstrap.contact-point-discovery {
         service-name = "{{ printf "%s-akka" (include "cpe.fullname" .) }}"
         discovery-method = kubernetes-api
-        required-contact-point-nr = {{ .Values.akkaOptions.clusterOptions.requiredContactPointNr | default 1 }}
+        required-contact-point-nr = {{ default 1 .Values.akkaOptions.clusterOptions.requiredContactPointNr }}
       }
 
       cluster {

@@ -48,6 +48,7 @@ akkaOptions:
   clusterOptions:
     logInfo: true
     clusterReadyCheck: true
+    requiredContactPointNr: 1
 
 services:
   batchportal:

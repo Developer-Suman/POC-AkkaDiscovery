@@ -29,6 +29,8 @@ spec:
                 name: {{ include "cpe.fullname" $ }}-secrets
             - configMapRef:
                 name: {{ include "cpe.fullname" $ }}-env-variables
+            - configMapRef:
+                name: {{ include "cpe.fullname" $ }}-akka-variables
           env:
 {{- if $d.env }}
 {{ toYaml $d.env | indent 12 }}
