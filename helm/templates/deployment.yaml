@@ -1,4 +1,4 @@
-{{- range $idx, $d := .Values.deployments }}
+﻿{{- range $idx, $d := .Values.deployments }}
 {{- if $d.enabled }}
 apiVersion: apps/v1
 kind: Deployment
@@ -52,10 +52,11 @@ spec:
           volumeMounts:
 {{- if $.Values.volumeMounts }}
 {{ toYaml $.Values.volumeMounts | indent 12 }}
-{{- end }}
+{{- else }}
             - name: akka-conf
               mountPath: /app/akka.hocon
               subPath: akka.hocon
+{{- end }}
           resources:
 {{ toYaml $d.resources | indent 12 }}
       volumes:
@@ -63,10 +64,14 @@ spec:
           secret:
             secretName: {{ include "cpe.fullname" $ }}-tns
             optional: false
+{{- if $.Values.volumes }}
+{{ toYaml $.Values.volumes | nindent 8 }}
+{{- else }}
         - name: akka-conf
           configMap:
             name: {{ include "cpe.fullname" $ }}-akka-conf
             optional: true
+{{- end }}
 ---
 {{- end }}
 {{- end }}
