@@ -5,6 +5,9 @@ akka {
     hostname = "0.0.0.0"
     port = 4053
   }
+  
+  loglevel = DEBUG
+  stdout-loglevel = DEBUG
 
   discovery {
     method = aggregate
@@ -28,6 +31,7 @@ akka {
   }
 
   cluster {
+    log-info = on
     downing-provider-class = "Akka.Cluster.SBR.SplitBrainResolverProvider, Akka.Cluster"
     split-brain-resolver {
       active-strategy = keep-majority
