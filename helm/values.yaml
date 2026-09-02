@@ -37,17 +37,9 @@ appsettings:
   ASPNETCORE_HTTP_PORT: "8080"
 
 akkaOptions:
-  clusterName: "FraudDetectionActorSystem"
   remoteOptions:
-    hostName: "0.0.0.0"
     port: 4051
-    publicPort: 4051
-    sendBufferSize: "4096000"
-    receiveBufferSize: "4096000"
-    maxFrameSize: "4096000"
   clusterOptions:
-    logInfo: true
-    clusterReadyCheck: true
     requiredContactPointNr: 1
 
 services:
@@ -76,7 +68,6 @@ deployments:
   - name: batchportal
     enabled: true
     replicaCount: 1
-    akkaRole: "portal"
     ports:
       pbm: 9110
       http: 8080
@@ -90,7 +81,6 @@ deployments:
   - name: editorservice
     enabled: true
     replicaCount: 1
-    akkaRole: "editors"
     ports:
       pbm: 9110
     resources:
@@ -103,7 +93,6 @@ deployments:
   - name: batchprocessor
     enabled: true
     replicaCount: 1
-    akkaRole: "batchprocessor"
     ports:
       pbm: 9110
     resources:

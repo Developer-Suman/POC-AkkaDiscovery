@@ -13,17 +13,23 @@ data:
       }
 
       discovery {
-        method = kubernetes-api
+        method = aggregate
+        aggregate.discovery-methods = [kubernetes-api, config]
 
         kubernetes-api {
           class = "Akka.Discovery.KubernetesApi.KubernetesApiServiceDiscovery, Akka.Discovery.KubernetesApi"
           pod-namespace = "{{ .Release.Namespace }}"
+          pod-label-selector = "cluster=nucleus-rule-services"
+        }
+
+        config {
+          class = "Akka.Discovery.Config.ConfigServiceDiscovery, Akka.Discovery"
+          services {}
         }
       }
 
       cluster.bootstrap.contact-point-discovery {
-        service-name = "{{ printf "%s-akka" (include "cpe.fullname" .) }}"
-        discovery-method = kubernetes-api
+        service-name = "nucleus-rule-services"
         required-contact-point-nr = {{ default 1 .Values.akkaOptions.clusterOptions.requiredContactPointNr }}
       }
 

@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: {{ printf "%s-%s" (include "cpe.fullname" $) $d.name }}
+        cluster: nucleus-rule-services
         {{- include "cpe.labels" $ | nindent 8 }}
     spec:
       containers:
@@ -29,8 +30,6 @@ spec:
                 name: {{ include "cpe.fullname" $ }}-secrets
             - configMapRef:
                 name: {{ include "cpe.fullname" $ }}-env-variables
-            - configMapRef:
-                name: {{ include "cpe.fullname" $ }}-akka-variables
           env:
 {{- if $d.env }}
 {{ toYaml $d.env | indent 12 }}
@@ -39,20 +38,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-            - name: AkkaOptions__Discovery__KubernetesApi__PodNamespace
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-{{- if $d.akkaRole }}
-            - name: AkkaOptions__ClusterOptions__Roles__0
-              value: {{ $d.akkaRole | quote }}
-{{- end }}
-{{- if $d.ports.pbm }}
-            - name: AkkaOptions__PetabridgeOptions__Port
-              value: "{{ $d.ports.pbm }}"
-            - name: AkkaOptions__PetabridgeOptions__Host
-              value: "0.0.0.0"
-{{- end }}
             - name: Logging__LogLevel__Akka
               value: "Debug"
           volumeMounts:

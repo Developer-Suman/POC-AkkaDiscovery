@@ -88,14 +88,3 @@ These delegate to the canonical "helm.*" helpers defined above.
 {{- define "cpe.serviceAccountName" -}}
 {{- include "helm.serviceAccountName" . -}}
 {{- end }}
-
-
-{{/*
-Stub for akkaOptions seed nodes helper: return empty string or configured value
-*/}}
-{{- define "cpe.akkaOptionsSeedNodes" -}}
-{{- $ao := index .Values "akkaOptions" -}}
-{{- if and $ao (index $ao "seedNodes") -}}
-AkkaOptions__SeedNodes: {{ printf "%q" (index $ao "seedNodes") }}
-{{- end -}}
-{{- end }}
