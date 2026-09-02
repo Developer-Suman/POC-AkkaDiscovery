@@ -6,6 +6,9 @@ akka {
     hostname = "0.0.0.0"
     port = 4055
   }
+  
+  loglevel = DEBUG
+  stdout-loglevel = DEBUG
 
   discovery {
     method = aggregate
@@ -21,6 +24,7 @@ akka {
       class = "Akka.Discovery.Config.ConfigServiceDiscovery, Akka.Discovery"
       services {}
     }
+    
   }
 
   cluster.bootstrap.contact-point-discovery {
@@ -29,6 +33,7 @@ akka {
   }
 
   cluster {
+    log-info = on
     downing-provider-class = "Akka.Cluster.SBR.SplitBrainResolverProvider, Akka.Cluster"
     split-brain-resolver {
       active-strategy = keep-majority
@@ -37,6 +42,8 @@ akka {
     }
   }
 }
+
+
 
 petabridge.cmd {
   host = "0.0.0.0"
