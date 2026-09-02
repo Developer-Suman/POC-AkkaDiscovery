@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Akka.Discovery.KubernetesApi" Version="1.5.70" />
     <PackageReference Include="Akka.Hosting" Version="1.5.70" />
+    <PackageReference Include="Akka.Management" Version="1.5.70" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
     <PackageReference Include="Petabridge.Cmd.Cluster" Version="1.5.0" />
     <PackageReference Include="Petabridge.Cmd.Host" Version="1.5.0" />

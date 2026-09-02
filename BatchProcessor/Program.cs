@@ -1,13 +1,11 @@
 using BatchProcessor;
 using Akka.Hosting;
+using Akka.Management;
+using Akka.Management.Cluster.Bootstrap;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-var actorSystemName = builder.Configuration["AkkaOptions:ClusterName"] is { Length: > 0 } clusterName
-    ? clusterName
-    : "FraudDetectionActorSystem";
-
-builder.Services.AddAkka(actorSystemName, (akkaBuilder, provider) =>
+builder.Services.AddAkka("FraudDetectionActorSystem", (akkaBuilder, provider) =>
 {
     // Load base config (production/Kubernetes)
     var hoconPath = Path.Combine(builder.Environment.ContentRootPath, "akka.hocon");
@@ -23,13 +21,19 @@ builder.Services.AddAkka(actorSystemName, (akkaBuilder, provider) =>
         akkaBuilder.AddHocon(File.ReadAllText(envHoconPath), HoconAddMode.Prepend);
     }
 
-    // AkkaOptions__* env vars (set by the Helm chart — e.g. the pod's own IP for
-    // remote.public-hostname) always win: prepended last, after the file-based config.
-    var overrideHocon = AkkaOptionsHocon.Build(builder.Configuration);
-    if (!string.IsNullOrWhiteSpace(overrideHocon))
+    // The pod's own IP (Helm sets this from the Downward API) has to be advertised to peers —
+    // binding to 0.0.0.0 alone isn't a dialable address. Wins over both files above.
+    var publicHostName = builder.Configuration["AkkaOptions:RemoteOptions:PublicHostName"];
+    if (!string.IsNullOrWhiteSpace(publicHostName))
     {
-        akkaBuilder.AddHocon(overrideHocon, HoconAddMode.Prepend);
+        akkaBuilder.AddHocon($"akka.remote.dot-netty.tcp.public-hostname = \"{publicHostName}\"", HoconAddMode.Prepend);
     }
+
+    // Cluster Bootstrap and Akka.Management must be started explicitly - the discovery/contact-point
+    // settings in the HOCON files are inert without this.
+    akkaBuilder
+        .WithAkkaManagement(autoStart: true)
+        .WithClusterBootstrap(autoStart: true);
 });
 
 builder.Services.AddHostedService<PetabridgeCommandHostService>();

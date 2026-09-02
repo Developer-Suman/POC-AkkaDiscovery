@@ -8,17 +8,23 @@ akka {
   }
 
   discovery {
-    method = kubernetes-api
+    method = aggregate
+    aggregate.discovery-methods = [kubernetes-api, config]
 
     kubernetes-api {
       class = "Akka.Discovery.KubernetesApi.KubernetesApiServiceDiscovery, Akka.Discovery.KubernetesApi"
       pod-namespace = "ppm-cpe-qa"
+      pod-label-selector = "cluster=nucleus-rule-services"
+    }
+
+    config {
+      class = "Akka.Discovery.Config.ConfigServiceDiscovery, Akka.Discovery"
+      services {}
     }
   }
 
   cluster.bootstrap.contact-point-discovery {
     service-name = "nucleus-rule-services"
-    discovery-method = kubernetes-api
     required-contact-point-nr = 3
   }
 

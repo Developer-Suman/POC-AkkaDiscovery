@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Akka.Discovery.KubernetesApi" Version="1.5.70" />
     <PackageReference Include="Akka.Hosting" Version="1.5.70" />
+    <PackageReference Include="Akka.Management" Version="1.5.70" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>10.*-*</Version>
