@@ -20,8 +20,16 @@ data:
 
         kubernetes-api {
           class = "Akka.Discovery.KubernetesApi.KubernetesApiServiceDiscovery, Akka.Discovery.KubernetesApi"
+          api-ca-path = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+          api-token-path = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+          api-service-host-env-name = "KUBERNETES_SERVICE_HOST"
+          api-service-port-env-name = "KUBERNETES_SERVICE_PORT"
+          pod-namespace-path = "/var/run/secrets/kubernetes.io/serviceaccount/namespace"
           pod-namespace = "{{ .Release.Namespace }}"
+          pod-domain = "cluster.local"
           pod-label-selector = "cluster=nucleus-rule-services"
+          use-raw-ip = true
+          container-name = ""
         }
 
         config {

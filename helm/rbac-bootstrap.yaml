@@ -1,0 +1,48 @@
+# One-time RBAC bootstrap for the "myrelease" release in namespace ppm-cpe-qa.
+#
+# This is NOT part of the Helm chart's templates/ directory, so `helm upgrade` never touches it and
+# never needs RBAC-management permissions. It grants the release's ServiceAccount (already created by
+# the chart, via serviceAccount.create: true) permission to list/get/watch pods in this namespace only -
+# required by Akka.Discovery.KubernetesApi for cluster member discovery.
+#
+# Apply once, by someone with sufficient privilege in this namespace:
+#   oc apply -f helm/rbac-bootstrap.yaml -n ppm-cpe-qa
+#
+# If the Helm release name or namespace changes, regenerate this file with:
+#   helm template <release-name> ./helm -s templates/rbac.yaml --namespace <namespace> > helm/rbac-bootstrap.yaml
+# (then re-add this header comment). templates/rbac.yaml itself was intentionally removed from the
+# chart - see git history - to keep it out of the regular helm upgrade flow.
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: myrelease-helm-pod-reader
+  labels:
+    helm.sh/chart: helm-0.1.0
+    app.kubernetes.io/name: helm
+    app.kubernetes.io/instance: myrelease
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: myrelease-helm-pod-reader
+  labels:
+    helm.sh/chart: helm-0.1.0
+    app.kubernetes.io/name: helm
+    app.kubernetes.io/instance: myrelease
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: myrelease-helm-pod-reader
+subjects:
+  - kind: ServiceAccount
+    name: myrelease-helm
+    namespace: ppm-cpe-qa

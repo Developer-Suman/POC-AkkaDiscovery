@@ -4,7 +4,7 @@
 
 image:
   repository: artifactory.cotiviti.com/adlm-sandbox-docker/sandbox/poc
-  tag: latest
+  tag: new
 
 secrets:
   - name: secrets
@@ -129,7 +129,7 @@ httpRoute:
   enabled: false
 
 serviceAccount:
-  create: false
+  create: true
   automount: true
   annotations: {}
   name: ""
