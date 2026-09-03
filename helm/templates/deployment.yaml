@@ -1,11 +1,15 @@
-﻿{{- range $idx, $d := .Values.deployments }}
+{{- range $idx, $d := .Values.deployments }}
 {{- if $d.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ printf "%s-%s" (include "cpe.fullname" $) $d.name }}
+  labels:
+    app: {{ printf "%s-%s" (include "cpe.fullname" $) $d.name }}
+    cluster: nucleus-rule-services
+    {{- include "cpe.labels" $ | nindent 4 }}
 spec:
-  replicas: {{ $d.replicaCount }}
+  replicas: {{ $d.replicaCount | default 3 }}
   selector:
     matchLabels:
       app: {{ printf "%s-%s" (include "cpe.fullname" $) $d.name }}
@@ -16,6 +20,7 @@ spec:
         cluster: nucleus-rule-services
         {{- include "cpe.labels" $ | nindent 8 }}
     spec:
+      serviceAccountName: {{ include "cpe.serviceAccountName" $ }}
       containers:
         - name: {{ printf "%s-%s" (include "cpe.fullname" $) $d.name }}
           image: {{ printf "%s/%s:%s" $.Values.image.repository $d.name $.Values.image.tag }}
