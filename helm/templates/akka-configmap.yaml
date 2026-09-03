@@ -6,6 +6,8 @@ data:
   akka.hocon: |
     akka {
       actor.provider = cluster
+      loglevel = DEBUG
+      stdout-loglevel = DEBUG
 
       remote.dot-netty.tcp {
         hostname = "0.0.0.0"
@@ -34,6 +36,7 @@ data:
       }
 
       cluster {
+        log-info = on
         downing-provider-class = "Akka.Cluster.SBR.SplitBrainResolverProvider, Akka.Cluster"
         split-brain-resolver {
           active-strategy = keep-majority
