@@ -30,10 +30,15 @@ builder.Services.AddAkka("FraudDetectionActorSystem", (akkaBuilder, provider) =>
     }
 
     // Cluster Bootstrap and Akka.Management must be started explicitly - the discovery/contact-point
-    // settings in the HOCON files are inert without this.
-    akkaBuilder
-        .WithAkkaManagement(autoStart: true)
-        .WithClusterBootstrap(autoStart: true);
+    // settings in the HOCON files are inert without this. Development uses static akka.cluster.seed-nodes
+    // instead (see akka.Development.hocon) - Cluster Bootstrap must not run alongside that, since its own
+    // join/new-cluster decision races against the classic seed-nodes join process.
+    if (!builder.Environment.IsDevelopment())
+    {
+        akkaBuilder
+            .WithAkkaManagement(autoStart: true)
+            .WithClusterBootstrap(autoStart: true);
+    }
 });
 
 builder.Services.AddHostedService<PetabridgeCommandHostService>();
