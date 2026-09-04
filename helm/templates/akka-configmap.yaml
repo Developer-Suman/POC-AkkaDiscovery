@@ -14,9 +14,26 @@ data:
         port = {{ .Values.akkaOptions.remoteOptions.port | default 4051 }}
       }
 
+      io.dns {
+        resolver = async-dns
+        async-dns {
+          class = "Akka.Discovery.Dns.Internal.DnsClient, Akka.Discovery.Dns"
+          provider-object = "Akka.Discovery.Dns.Internal.AsyncDnsProvider, Akka.Discovery.Dns"
+          nameservers = []
+          cache-cleanup-interval = 120s
+          positive-ttl = forever
+        }
+      }
+
       discovery {
         method = aggregate
-        aggregate.discovery-methods = [kubernetes-api, config]
+        aggregate.discovery-methods = [akka-dns, kubernetes-api, config]
+
+        akka-dns {
+          class = "Akka.Discovery.Dns.DnsServiceDiscovery, Akka.Discovery.Dns"
+          resolve-timeout = 5s
+          verbose-failure-logging = on
+        }
 
         kubernetes-api {
           class = "Akka.Discovery.KubernetesApi.KubernetesApiServiceDiscovery, Akka.Discovery.KubernetesApi"
@@ -40,6 +57,9 @@ data:
 
       cluster.bootstrap.contact-point-discovery {
         service-name = "nucleus-rule-services"
+        service-namespace = "{{ .Release.Namespace }}.svc.cluster.local"
+        port-name = "management"
+        protocol = "tcp"
         required-contact-point-nr = {{ default 1 .Values.akkaOptions.clusterOptions.requiredContactPointNr }}
       }
 

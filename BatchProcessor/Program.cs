@@ -35,6 +35,15 @@ builder.Services.AddAkka("FraudDetectionActorSystem", (akkaBuilder, provider) =>
     // join/new-cluster decision races against the classic seed-nodes join process.
     if (!builder.Environment.IsDevelopment())
     {
+        // akka-dns's async resolver needs real nameserver IPs - its own reference.conf default is a
+        // non-functional placeholder ("127.0.0.1:53"). Kubernetes always populates /etc/resolv.conf
+        // with the real cluster DNS server, so read it directly rather than trying to guess/hardcode it.
+        var nameserversHocon = BuildDnsNameserversHocon();
+        if (!string.IsNullOrWhiteSpace(nameserversHocon))
+        {
+            akkaBuilder.AddHocon(nameserversHocon, HoconAddMode.Prepend);
+        }
+
         akkaBuilder
             .WithAkkaManagement(autoStart: true)
             .WithClusterBootstrap(autoStart: true);
@@ -46,3 +55,24 @@ builder.Services.AddHostedService<Worker>();
 
 var host = builder.Build();
 host.Run();
+
+static string BuildDnsNameserversHocon()
+{
+    const string resolvConfPath = "/etc/resolv.conf";
+    if (!File.Exists(resolvConfPath))
+    {
+        return string.Empty;
+    }
+
+    var nameservers = File.ReadAllLines(resolvConfPath)
+        .Select(line => line.Trim())
+        .Where(line => line.StartsWith("nameserver ", StringComparison.OrdinalIgnoreCase))
+        .Select(line => line["nameserver ".Length..].Trim())
+        .Where(ip => !string.IsNullOrWhiteSpace(ip))
+        .Select(ip => $"\"{ip}:53\"")
+        .ToArray();
+
+    return nameservers.Length == 0
+        ? string.Empty
+        : $"akka.io.dns.async-dns.nameservers = [{string.Join(", ", nameservers)}]";
+}

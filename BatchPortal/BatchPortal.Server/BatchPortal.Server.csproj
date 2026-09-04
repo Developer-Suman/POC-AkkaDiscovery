@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Akka.Discovery.Dns" Version="1.5.70" />
     <PackageReference Include="Akka.Discovery.KubernetesApi" Version="1.5.70" />
     <PackageReference Include="Akka.Hosting" Version="1.5.70" />
     <PackageReference Include="Akka.Management" Version="1.5.70" />

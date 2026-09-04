@@ -13,3 +13,7 @@ spec:
       port: {{ .Values.akkaOptions.remoteOptions.port | default 4051 }}
       targetPort: {{ .Values.akkaOptions.remoteOptions.port | default 4051 }}
       protocol: TCP
+    - name: management
+      port: 8558
+      targetPort: 8558
+      protocol: TCP
