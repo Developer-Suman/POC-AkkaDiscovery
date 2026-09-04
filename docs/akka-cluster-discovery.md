@@ -16,7 +16,7 @@ All three services (`BatchPortal`, `BatchProcessor`, `EditorService`) use the sa
   `.WithAkkaManagement(autoStart: true).WithClusterBootstrap(autoStart: true)`.
 - **Development** (`akka.Development.hocon`): plain static `akka.cluster.seed-nodes` - Cluster
   Bootstrap is explicitly *not* started here (`Program.cs` guards it with
-  `!builder.Environment.IsDevelopment()`). See "Why not both at once" below.
+  `!builder.Environment.IsDevelopment()`). See "Coexistence" in the trade-off table below.
 
 ```hocon
 akka.discovery {
@@ -36,6 +36,20 @@ akka.discovery {
   }
 }
 ```
+
+### A DNS-based (`Akka.Discovery.Dns`) alternative was evaluated and reverted
+
+`kubernetes-api` discovery needs a `Role`/`RoleBinding` granting the pod's ServiceAccount
+`get`/`list`/`watch` on `pods` - confirmed blocked in this environment via `oc auth can-i create
+roles` / `create rolebindings` both returning `no` for the deploying account (see pitfall 5 below).
+As a way to unblock cluster formation without waiting on that grant, `Akka.Discovery.Dns` was added
+as a third aggregate method (resolving peers via the headless Service's DNS SRV records instead,
+which needs no RBAC at all), then deliberately reverted in favor of resolving the RBAC grant properly
+instead of working around it. It required its own extra moving parts - a `management` port on the
+headless Service, `akka.io.dns.resolver = async-dns` (the default resolver can't do SRV lookups), and
+reading `/etc/resolv.conf` at startup for real nameserver IPs (the package's own default is a
+non-functional placeholder). Worth knowing this path exists and works if the RBAC approval turns out
+to be a genuine dead end again.
 
 ## Logs that confirm it's working
 
@@ -120,3 +134,13 @@ deterministic), and never enable both mechanisms on the same running node.
    real debugging time: redeploying under an unchanged tag does not guarantee a fresh image pull, so a
    "fixed and redeployed" pod can silently keep running old code indefinitely. Use a unique tag per
    build when validating a fix.
+
+7. **RBAC that can't be granted at all is a real failure mode, not just friction.** `oc auth can-i
+   create roles` / `create rolebindings` both returning `no`, from the same account that otherwise
+   deploys fine, meant `kubernetes-api` discovery was permanently unusable in this environment
+   regardless of how correct its config was - no YAML change fixes an authorization decision made by
+   the API server based on the calling identity's bound Roles. The RBAC objects this needs
+   (`helm/rbac-bootstrap.yaml`) are deliberately kept out of `helm/templates/` so the regular deploy
+   flow never needs this permission itself - they have to be applied once, out-of-band, by someone who
+   actually has it. A verbal "done" didn't hold up on the first attempt; the only reliable proof is
+   `oc get rolebinding <name> -n <namespace> -o yaml` actually returning the object.
