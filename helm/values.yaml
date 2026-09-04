@@ -4,7 +4,7 @@
 
 image:
   repository: artifactory.cotiviti.com/adlm-sandbox-docker/sandbox/poc
-  tag: new
+  tag: newtest
 
 secrets:
   - name: secrets
