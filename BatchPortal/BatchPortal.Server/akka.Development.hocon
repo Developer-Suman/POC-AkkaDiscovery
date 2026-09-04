@@ -14,6 +14,9 @@ akka {
     "akka.tcp://FraudDetectionActorSystem@127.0.0.1:4055"
   ]
 
+  # This node's role - shows up in `cluster show` (petabridge.cmd) instead of an empty [] list
+  cluster.roles = ["portal"]
+
   # Override discovery to use static config instead of Kubernetes
   discovery {
     method = config
