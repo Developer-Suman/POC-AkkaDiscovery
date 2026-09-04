@@ -44,9 +44,24 @@ builder.Services.AddAkka("FraudDetectionActorSystem", (akkaBuilder, provider) =>
             akkaBuilder.AddHocon(nameserversHocon, HoconAddMode.Prepend);
         }
 
+        // WithClusterBootstrap builds a strongly-typed Setup object that takes priority over HOCON
+        // entirely - calling it with no explicit values (as WithClusterBootstrap(autoStart: true) does)
+        // still constructs that Setup with nulls, which silently discards whatever
+        // cluster.bootstrap.contact-point-discovery.* is configured in the HOCON files and falls back
+        // to Akka's own defaults (actor-system-name as service-name, empty port-name, required=2).
+        // Passing the real values here is the only way they actually take effect.
+        var podNamespace = ReadPodNamespace();
+        var serviceNamespace = string.IsNullOrWhiteSpace(podNamespace) ? null : $"{podNamespace}.svc.cluster.local";
+        var requiredContactPoints = int.TryParse(builder.Configuration["AkkaOptions:ClusterOptions:RequiredContactPointNr"], out var n) ? n : 3;
+
         akkaBuilder
             .WithAkkaManagement(autoStart: true)
-            .WithClusterBootstrap(autoStart: true);
+            .WithClusterBootstrap(
+                serviceName: "nucleus-rule-services",
+                serviceNamespace: serviceNamespace,
+                portName: "management",
+                requiredContactPoints: requiredContactPoints,
+                autoStart: true);
     }
 });
 
@@ -55,6 +70,12 @@ builder.Services.AddHostedService<Worker>();
 
 var host = builder.Build();
 host.Run();
+
+static string? ReadPodNamespace()
+{
+    const string path = "/var/run/secrets/kubernetes.io/serviceaccount/namespace";
+    return File.Exists(path) ? File.ReadAllText(path).Trim() : null;
+}
 
 static string BuildDnsNameserversHocon()
 {

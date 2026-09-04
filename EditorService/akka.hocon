@@ -50,13 +50,10 @@ akka {
     }
   }
 
-  cluster.bootstrap.contact-point-discovery {
-    service-name = "nucleus-rule-services"
-    service-namespace = "ppm-cpe-qa.svc.cluster.local"
-    port-name = "management"
-    protocol = "tcp"
-    required-contact-point-nr = 3
-  }
+  # cluster.bootstrap.contact-point-discovery is deliberately NOT set here - WithClusterBootstrap(...)
+  # in Program.cs passes service-name/service-namespace/port-name/required-contact-point-nr explicitly,
+  # via a strongly-typed Setup object that takes priority over HOCON regardless of what's set here.
+  # Setting it in this file too would be misleading dead config.
 
   cluster {
     log-info = on
