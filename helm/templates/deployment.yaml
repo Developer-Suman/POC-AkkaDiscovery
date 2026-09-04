@@ -43,6 +43,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+            - name: AkkaOptions__ClusterOptions__RequiredContactPointNr
+              value: "{{ $.Values.akkaOptions.clusterOptions.requiredContactPointNr | default 3 }}"
             - name: Logging__LogLevel__Akka
               value: "Debug"
           volumeMounts:

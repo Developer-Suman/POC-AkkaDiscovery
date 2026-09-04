@@ -4,7 +4,7 @@
 
 image:
   repository: artifactory.cotiviti.com/adlm-sandbox-docker/sandbox/poc
-  tag: newtest
+  tag: dnstest
 
 secrets:
   - name: secrets
@@ -40,7 +40,9 @@ akkaOptions:
   remoteOptions:
     port: 4051
   clusterOptions:
-    requiredContactPointNr: 1
+    # How many contact points Cluster Bootstrap must discover before it'll join/form a cluster.
+    # 3 matches the 3 services (batchportal, batchprocessor, editorservice) expected to cluster together.
+    requiredContactPointNr: 3
 
 services:
   batchportal:
