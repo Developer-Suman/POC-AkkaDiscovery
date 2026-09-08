@@ -1,7 +1,5 @@
 akka {
   # Local development: bind to loopback only
-  actor.telemetry.enabled = on
-
   remote.dot-netty.tcp {
     hostname = "127.0.0.1"
     port = 4055

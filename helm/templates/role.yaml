@@ -1,0 +1,17 @@
+{{- if .Values.rbac.create }}
+# Opt-in only: helm upgrade/install will try to create/update this Role, which needs
+# RBAC-management rights the deploying account may not have (see helm/rbac-bootstrap.yaml
+# for the default path that doesn't require those rights). Only set rbac.create=true if
+# the account running helm has been granted RBAC-management permissions in this namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "cpe.fullname" . }}-role
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "cpe.labels" . | nindent 4 }}
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+{{- end }}

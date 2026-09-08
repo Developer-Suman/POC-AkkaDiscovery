@@ -4,7 +4,7 @@
 
 image:
   repository: artifactory.cotiviti.com/adlm-sandbox-docker/sandbox/poc
-  tag: prod1
+  tag: prod
 
 secrets:
   - name: secrets
@@ -138,6 +138,18 @@ serviceAccount:
   automount: true
   annotations: {}
   name: ""
+  
+# RBAC (Role/RoleBinding for kubernetes-api discovery) is NOT managed by this chart by
+# default. helm upgrade/install runs with whatever permissions the deploying account has,
+# and creating/updating RBAC objects requires RBAC-management rights that account may not
+# have - if it doesn't, this would fail with 403 and block the entire release, not just RBAC.
+# The default, always-safe path is helm/rbac-bootstrap.yaml, applied once out-of-band by an
+# account that does have those rights (see that file's header for the exact commands).
+# Only set create: true here if the account running helm has been granted RBAC-management
+# permissions in this namespace and you want Helm to own the Role/RoleBinding instead.
+rbac:
+  create: false
+
 
 podAnnotations: {}
 podLabels: {}
