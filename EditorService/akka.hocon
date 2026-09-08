@@ -63,13 +63,8 @@ akka {
       stable-after = 20s
       down-all-when-unstable = on
     }
-    roles = ["editorservices"]
+    roles = ["editorservice"]
   }
-  cluster.bootstrap.contact-point-discovery {
-      discovery-method = aggregate
-      service-name = "nucleus-rule-services"  # Should match your k8s service (not full DNS)
-      required-contact-point-nr = 1
-    }
 }
 
 petabridge.cmd {

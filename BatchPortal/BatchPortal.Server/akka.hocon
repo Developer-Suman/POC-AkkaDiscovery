@@ -67,12 +67,6 @@ akka {
     }
     roles = ["batchportal"]
   }
-  
-  cluster.bootstrap.contact-point-discovery {
-      discovery-method = aggregate
-      service-name = "nucleus-rule-services"  # Should match your k8s service (not full DNS)
-      required-contact-point-nr = 1
-    }
 }
 
 
