@@ -65,6 +65,7 @@ akka {
       stable-after = 20s
       down-all-when-unstable = on
     }
+    roles = ["batchportal"]
   }
 }
 
