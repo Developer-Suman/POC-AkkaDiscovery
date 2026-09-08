@@ -4,7 +4,7 @@
 
 image:
   repository: artifactory.cotiviti.com/adlm-sandbox-docker/sandbox/poc
-  tag: prod
+  tag: prod1
 
 secrets:
   - name: secrets
@@ -70,6 +70,7 @@ deployments:
   - name: batchportal
     enabled: true
     replicaCount: 1
+    akkaRole: "batchportal"
     ports:
       pbm: 9110
       http: 8080
@@ -83,6 +84,7 @@ deployments:
   - name: editorservice
     enabled: true
     replicaCount: 1
+    akkaRole: "editorservice"
     ports:
       pbm: 9110
     resources:
@@ -95,6 +97,7 @@ deployments:
   - name: batchprocessor
     enabled: true
     replicaCount: 1
+    akkaRole: "batchprocessor"
     ports:
       pbm: 9110
     resources:
