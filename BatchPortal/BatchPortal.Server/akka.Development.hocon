@@ -15,7 +15,7 @@ akka {
   ]
 
   # This node's role - shows up in `cluster show` (petabridge.cmd) instead of an empty [] list
-  cluster.roles = ["portal"]
+  cluster.roles = ["batchportal"]
 
   # Override discovery to use static config instead of Kubernetes
   discovery {

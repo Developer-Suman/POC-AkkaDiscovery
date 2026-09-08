@@ -54,6 +54,15 @@ builder.Services.AddAkka("FraudDetectionActorSystem", (akkaBuilder, provider) =>
         var serviceNamespace = string.IsNullOrWhiteSpace(podNamespace) ? null : $"{podNamespace}.svc.cluster.local";
         var requiredContactPoints = int.TryParse(builder.Configuration["AkkaOptions:ClusterOptions:RequiredContactPointNr"], out var n) ? n : 3;
 
+        // Same silent-override risk as everything above - set the role via HOCON override rather than
+        // relying on akka.Development.hocon-style hardcoded roles, since the ConfigMap mounted at
+        // runtime is shared across all three deployments and can't hold a single deployment's role.
+        var akkaRole = builder.Configuration["AkkaOptions:ClusterOptions:Roles:0"];
+        if (!string.IsNullOrWhiteSpace(akkaRole))
+        {
+            akkaBuilder.AddHocon($"akka.cluster.roles = [\"{akkaRole}\"]", HoconAddMode.Prepend);
+        }
+
         akkaBuilder
             .WithAkkaManagement(autoStart: true)
             .WithClusterBootstrap(
