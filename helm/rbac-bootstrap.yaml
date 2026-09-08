@@ -1,25 +1,13 @@
-# One-time RBAC bootstrap for the "myrelease" release in namespace ppm-cpe-qa.
-#
-# This is NOT part of the Helm chart's templates/ directory, so `helm upgrade` never touches it and
-# never needs RBAC-management permissions. It grants the release's ServiceAccount (already created by
-# the chart, via serviceAccount.create: true) permission to list/get/watch pods in this namespace only -
-# required by Akka.Discovery.KubernetesApi for cluster member discovery.
-#
-# Includes "services" alongside "pods" per explicit request, even though Akka.Discovery.KubernetesApi's
-# KubernetesApiServiceDiscovery only ever calls ListNamespacedPod (services isn't required for cluster
-# discovery to work) - harmless to include, just wider than strictly necessary.
-#
-# Apply once, by someone with sufficient privilege in this namespace:
+# Deliberately kept OUTSIDE helm/templates/ so a plain `helm upgrade`/`helm lint` never
+# needs RBAC-management permissions - apply this once, out-of-band, with an account that
+# has them:
 #   oc apply -f helm/rbac-bootstrap.yaml -n ppm-cpe-qa
+#   oc get rolebinding myrelease-helm-rolebinding -n ppm-cpe-qa
 #
-# Verify it actually exists (only someone with RBAC-read rights in this namespace can run this):
-#   oc get rolebinding myrelease-helm-rolebinding -n ppm-cpe-qa -o yaml
-#
-# If the Helm release name or namespace changes, regenerate the names below to match
-# "<release>-helm" wherever "myrelease-helm" appears. templates/rbac.yaml itself was intentionally
-# removed from the Helm chart - see git history - to keep this out of the regular helm upgrade flow,
-# since managing RBAC objects needs elevated permissions this project's deploy account doesn't have.
----
+# helm/templates/role.yaml and rolebinding.yaml offer an alternative, in-chart version of
+# this same Role/RoleBinding, gated behind values.yaml's `rbac.create` (default false).
+# Only flip that to true if the account running helm has RBAC-management rights in this
+# namespace and you'd rather Helm own these objects instead of managing them here.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -33,7 +21,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 rules:
   - apiGroups: [""]
-    resources: ["pods", "services"]
+    resources: ["pods"]
     verbs: ["get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1

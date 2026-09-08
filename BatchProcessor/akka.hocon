@@ -6,8 +6,11 @@ akka {
     port = 4053
   }
   
-  loglevel = DEBUG
-  stdout-loglevel = DEBUG
+  # INFO (not DEBUG) - akka.cluster.log-info = on below already surfaces discovery/join/member-up
+  # events at INFO level; DEBUG adds so much DNS/actor-internal noise that those events get buried
+  # and truncated out of any reasonably-sized log capture.
+  loglevel = INFO
+  stdout-loglevel = INFO
 
   io.dns {
     resolver = async-dns
