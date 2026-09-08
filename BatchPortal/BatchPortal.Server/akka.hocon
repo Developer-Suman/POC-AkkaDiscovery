@@ -23,7 +23,7 @@ akka {
 
   discovery {
     method = aggregate
-    aggregate.discovery-methods = [akka-dns, kubernetes-api, config]
+    aggregate.discovery-methods = [kubernetes-api, akka-dns, config]
 
     akka-dns {
       class = "Akka.Discovery.Dns.DnsServiceDiscovery, Akka.Discovery.Dns"
@@ -65,6 +65,7 @@ akka {
       stable-after = 20s
       down-all-when-unstable = on
     }
+    roles = ["batchportal"]
   }
 }
 
