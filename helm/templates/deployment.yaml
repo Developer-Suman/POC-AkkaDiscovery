@@ -26,6 +26,8 @@ spec:
           image: {{ printf "%s/%s:%s" $.Values.image.repository $d.name $.Values.image.tag }}
           imagePullPolicy: IfNotPresent
           ports:
+            - containerPort: 8558
+              name: management
 {{- range $pname, $p := $d.ports }}
             - containerPort: {{ $p }}
               name: {{ $pname }}
@@ -49,8 +51,6 @@ spec:
             - name: AkkaOptions__ClusterOptions__Roles__0
               value: {{ $d.akkaRole | quote }}
 {{- end }}
-            - name: Logging__LogLevel__Akka
-              value: "Debug"
           volumeMounts:
 {{- if $.Values.volumeMounts }}
 {{ toYaml $.Values.volumeMounts | indent 12 }}

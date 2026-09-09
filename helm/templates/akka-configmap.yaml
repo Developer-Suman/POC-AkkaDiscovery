@@ -28,6 +28,15 @@ data:
         }
       }
 
+      # How to tell which discovery method actually resolved contact points (no built-in
+      # "method used" log line exists at INFO level - confirmed by inspecting Akka.Discovery.dll
+      # directly; the only per-method messages are logged below INFO): check the ResolvedTarget
+      # address FORMAT in the "Located service members" log line -
+      #   kubernetes-api -> raw dotted IP, e.g. ResolvedTarget(172.23.5.127, 8558, 172.23.5.127)
+      #     (because use-raw-ip = true below)
+      #   akka-dns       -> DNS hostname, e.g. ResolvedTarget(172-23-5-128.<svc>.<ns>.svc.cluster.local, 8558, ...)
+      # Empirically verified by forcing kubernetes-api to return empty (bad pod-label-selector)
+      # and observing the format flip from raw IP to hostname in the same log line.
       discovery {
         method = aggregate
         aggregate.discovery-methods = [kubernetes-api, akka-dns, config]

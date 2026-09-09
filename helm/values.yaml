@@ -12,7 +12,7 @@ secrets:
     data: {}
 
 appsettings:
-  Logging__LogLevel__Default: "Debug"
+  Logging__LogLevel__Default: "Information"
   RedisConfiguration__PoolSize: "2"
   RedisConfiguration__Hosts__0__Host: "w1q01-cpered01.mediconnect.net"
   RedisConfiguration__Hosts__0__Port: "6379"
