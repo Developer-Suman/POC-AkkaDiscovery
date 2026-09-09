@@ -23,6 +23,11 @@ akka {
     }
   }
 
+  # How to tell which discovery method actually resolved contact points: check the
+  # ResolvedTarget address FORMAT in the "Located service members" log line -
+  #   kubernetes-api -> raw dotted IP (use-raw-ip = true below)
+  #   akka-dns       -> DNS hostname (....svc.cluster.local)
+  # No built-in "method used" log line exists at INFO level in Akka.Discovery itself.
   discovery {
     method = aggregate
     aggregate.discovery-methods = [kubernetes-api, akka-dns, config]
